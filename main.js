@@ -31,8 +31,10 @@ app.get('/', (req, res)=> {
 app.get('/db', (req, res)=> {
     res.send(fs.readFileSync("db.json", "utf-8"))
 })
+app.get("images", (req, res)=> {
+    res.send(fs.readFileSync("images.json", "utf-8"))
+})
 
 app.listen(5155, ()=>  {
     console.log("server start on address http://127.0.0.1:5155")
 })
-
