@@ -1,6 +1,5 @@
-const express = require("express")
-const fs = require("fs")
-const cors = require("cors")
+const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const corsOptions = {
@@ -10,16 +9,13 @@ const corsOptions = {
 
 const app = express()
 app.use(bodyParser.json())
-app.use(cors(corsOptions))
-app.post('/db', cors(corsOptions), (req, res)=> {
-    const db = Array.from(JSON.parse(fs.readFileSync("db.json", "utf-8")))
-    db.push(req.body)
-    fs.writeFileSync("db.json", JSON.stringify(db))
-    res.send({"status":"success"})
+// app.use(cors(corsOptions))
+app.post('/db', (req, res)=> {
+    res.send({"status":"success", "body":req.body})
 })
 
 app.get('/', (req, res)=> {
-    res.send(fs.readFileSync("index.html", "utf-8"))
+    res.send("server live")
 })
 
 app.listen(5155, ()=>  {
