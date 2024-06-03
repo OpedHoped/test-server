@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <button>----</button>
+    <button onclick="a()" id="btn1">----</button>
+    <script defer>
+        const a = () => {
+            fetch("/db").then(data=>data.text()).then(data=>document.querySelector("#btn1").textContent = data)
+        }
+    </script>
 </body>
 </html>
