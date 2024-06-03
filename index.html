@@ -661,7 +661,7 @@
     const barDescr = document.querySelector(".footer").querySelector(".description");
     
     (async()=> {
-        const data = await fetch("/images.json").then(data=>data.json())
+        const data = await fetch("/images").then(data=>data.json())
         guide.src = `data:image/png;base64, ${data["guide-1"]}`
         guide.className = "styled-img"
         favicon.src = `data:image/png;base64, ${data["favicon"]}`
