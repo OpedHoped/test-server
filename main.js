@@ -1,19 +1,21 @@
 const express = require("express")
 const fs = require("fs")
 const cors = require("cors")
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
 const corsOptions = {
 	origin: '*',
-	optionsSuccessStatus: 200
+    methods: '*'
 };
 
 const app = express()
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
-app.post('/', cors(corsOptions), (req, res)=> {
-    console.log(req.body)
-    res.send({"a":"c"})
+app.post('/db', cors(corsOptions), (req, res)=> {
+    const db = Array.from(JSON.parse(fs.readFileSync("db.json", "utf-8")))
+    db.push(req.body)
+    fs.writeFileSync("db.json", JSON.stringify(db))
+    res.send({"status":"success"})
 })
 
 app.get('/', (req, res)=> {
