@@ -85,7 +85,7 @@
     .styled-btn:hover {
         text-shadow: 1px 1px 2px var(--red);
     }
-    .next-btn {
+    .next-btn, .before-btn {
         width: 100px;
     }
     .restart-btn {
@@ -95,15 +95,13 @@
         user-select: none;
         width: 200px;
         height: 12px;
-        border-radius: 12px;
         background-color: var(--dark-grey);
     }
-    .progress-bar::before {
-        content: "";
+    .progress-bar_before {
+        margin-left:246px;
         position: absolute;
-        width: 66px;
+        width: 200px;
         height: 12px;
-        border-radius: 12px;
         background-color: var(--red);
     }
     .combobox {
@@ -230,13 +228,6 @@
     .item-list li[data-rang="3"] {background-color:var(--veteran)}
     .item-list li[data-rang="4"] {background-color:var(--master)}
     .item-list li[data-rang="5"] {background-color:var(--legenda)}
-
-    .selector[data-level="2"] {
-        display: none;
-    }
-    .selector[data-level="3"] {
-        display: none;
-    }
 </style>
 <body>
     <div class="header">
@@ -252,20 +243,20 @@
     </div>
     <div class="body">
         <div class="selector" data-level="1">
-            <div class="block">
+            <div class="block block-1">
                 <h2 class="question">Ник в игре<span class="color2"> *</span></h2>
                 <input type="text" class="str-input styled-input" placeholder="Мой ответ">
             </div>
         </div>
         <div class="selector" data-level="1">
-            <div class="block">
+            <div class="block block-2">
                 <h2 class="question">Ник в дискорде (ID)<span class="color2"> *</span></h2>
-                <img src="./guide/guide1.png" alt="#" class="styled-img">
-                <input type="text" class="str-input styled-input" placeholder="Мой ответ">
+                <!-- server img -->
+                <!-- server input -->
             </div>
         </div>
         <div class="selector" data-level="1">
-            <div class="block">
+            <div class="block block-3">
                 <h2 class="question">Имя<span class="color2"> *</span></h2>
                 <input type="text" class="str-input styled-input" placeholder="Мой ответ">
             </div>
@@ -277,7 +268,7 @@
                 <div class="pre-block">
                     <div class="weapon-list combobox">
                         <input class="combobox-input" placeholder="Выберите из списка">
-                        <ul class="item-list weapons">
+                        <ul class="item-list weapons hidden">
                             <li data-rang="0">ПП-91 «Кедр»</li>
                             <li data-rang="0">Старый «Каштан»</li>
                             <li data-rang="0">АЕК-919К «Каштан»</li>
@@ -623,38 +614,107 @@
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Живучесть в сборке<span class="color2"> *</span></h2>
-                <input class="upgrade-input styled-input" placeholder="Ваш ответ" type="number">
+                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
             </div>
         </div>
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Пулестойкость в сборке<span class="color2"> *</span></h2>
-                <input class="upgrade-input styled-input" placeholder="Ваш ответ" type="number">
+                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
             </div>
         </div>
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Эффективность лечения в сборке<span class="color2"> *</span></h2>
-                <input class="upgrade-input styled-input" placeholder="Ваш ответ" type="number">
+                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
             </div>
         </div>
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Скорость в сборке<span class="color2"> *</span></h2>
-                <input class="upgrade-input styled-input" placeholder="Ваш ответ" type="number">
+                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
             </div>
         </div>
     </div>
     <div class="footer">
         <div class="box">
-            <button class="next-btn styled-btn hidden">Назад</button>
+            <button class="before-btn styled-btn hidden">Назад</button>
             <button class="next-btn styled-btn">Далее</button>
         </div>
-        <div class="progress-bar"></div><span class="description">Страница 1 из 3</span>
+        <div class="progress-bar"></div><div class="progress-bar_before"></div><span class="description">Страница 1 из 3</span>
+        
         <button class="restart-btn styled-btn">Очистить форму</button>
     </div>
 </body>
 <script defer>
-    fetch("./images.json").then(data=>data.text()).then(data=>console.log(data))
+    var level = 1
+    const favicon = document.createElement("img");
+    const guide = document.createElement("img");
+    const nextBtn = document.querySelector(".next-btn");
+    const beforeBtn = document.querySelector(".before-btn");
+    const selectors = document.querySelectorAll(".selector");
+    const input1 = document.createElement("input");
+    const block2 = document.querySelector(".block-2");
+    const bar = document.querySelector(".progress-bar_before");
+    const upgradeInputs = document.querySelectorAll(".upgrade-input");
+    console.log(bar);
+    const barDescr = document.querySelector(".footer").querySelector(".description");
+    
+    (async()=> {
+        const data = await fetch("/images.json").then(data=>data.json())
+        guide.src = `data:image/png;base64, ${data["guide-1"]}`
+        guide.className = "styled-img"
+        favicon.src = `data:image/png;base64, ${data["favicon"]}`
+    })()
+    nextBtn.role = "next"
+    input1.className = "str-input styled-input"
+    input1.placeholder = "Мой ответ"
+    input1.type = "text"
+    block2.append(guide);
+    block2.append(input1);
+
+    //events
+    nextBtn.onclick = () => {
+        if (nextBtn.role == "next") {
+            if (level < 3) {
+                level++;restartWindow()
+            }
+        } else {
+            //post
+        }
+    }
+    beforeBtn.onclick = () => {
+        if (level > 1) {
+            level--;restartWindow()
+        }
+    }
+    const restartWindow = () => {
+        selectors.forEach(selector=> {
+            selector.style.display = +selector.dataset["level"] != level ? "none" : "block"
+            if (!selector.dataset["level"]) selector.style.display = "block"
+        })
+        if (level > 1) {
+            beforeBtn.classList.remove("hidden")
+        } else {
+            beforeBtn.classList.add("hidden")
+        }
+        if (level > 2) {
+            nextBtn.textContent = "Отправить"
+            nextBtn.role = "submit"
+        } else {
+            nextBtn.textContent = "Далее"
+            nextBtn.role = "next"
+        }
+        console.log()
+        bar.style = `width: ${Math.round(200/(4-level))}px;`
+        barDescr.textContent = level + " из 3";
+    }
+    restartWindow()
+    upgradeInputs.forEach(input=>{
+        input.oninput = () => {
+            if (input.value > 15) input.value = 15;
+            if (input.value < 0) input.value = 0;
+        }
+    })
 </script>
 </html>
