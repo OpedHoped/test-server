@@ -9,8 +9,14 @@ const corsOptions = {
 };
 
 const app = express()
-app.use(bodyParser.json())
-app.use(cors(corsOptions))
+// app.use(bodyParser.json())
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    next();
+});
+// app.use(cors(corsOptions))
 app.post('/db', (req, res)=> {
     const db = JSON.parse(fs.readFileSync("db.json", "utf-8"))
     console.log(req.body)
