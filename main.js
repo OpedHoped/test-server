@@ -20,7 +20,7 @@ app.post('/', (req, res)=> {
     // const db = JSON.parse(fs.readFileSync("db.json", "utf-8"))
     // db.push(req.body)
     // fs.writeFileSync("db.json", JSON.stringify(db))
-    res.send({"data":JSON.stringify(db)})
+    res.send({"data":JSON.stringify(req.body)})
 })
 app.post("/db", (req,res)=> {
     res.send("success")
