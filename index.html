@@ -654,7 +654,7 @@
         <button class="restart-btn styled-btn">Очистить форму</button>
     </div>
 </body>
-<script>
-    
+<script defer>
+    fetch("./images.json").then(data=>data.text()).then(data=>console.log(data))
 </script>
 </html>
