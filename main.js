@@ -31,7 +31,7 @@ app.get('/', (req, res)=> {
 app.get('/db', (req, res)=> {
     res.send(fs.readFileSync("db.json", "utf-8"))
 })
-app.get("images", (req, res)=> {
+app.get("/images", (req, res)=> {
     res.send(fs.readFileSync("images.json", "utf-8"))
 })
 
