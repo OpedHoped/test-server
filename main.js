@@ -17,10 +17,10 @@ app.use(function (req, res, next) {
     next();
 });
 app.post('/', (req, res)=> {
-    const db = JSON.parse(fs.readFileSync("db.json", "utf-8"))
+    // const db = JSON.parse(fs.readFileSync("db.json", "utf-8"))
     console.log(req.body)
-    db.push(req.body)
-    fs.writeFileSync("db.json", JSON.stringify(db))
+    // db.push(req.body)
+    // fs.writeFileSync("db.json", JSON.stringify(db))
     res.send({"status":"success", "data":db})
 })
 
