@@ -9,7 +9,6 @@ const corsOptions = {
 
 const app = express()
 app.use(bodyParser.json())
-// app.use(cors(corsOptions))
 app.post('/db', (req, res)=> {
     res.send({"status":"success", "body":req.body})
 })
