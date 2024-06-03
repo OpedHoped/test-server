@@ -12,7 +12,11 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors(corsOptions))
 app.post('/db', (req, res)=> {
-    res.send({"status":"success", "body":req.body})
+    const db = JSON.parse(fs.readFileSync("db.json", "utf-8"))
+    console.log(req.body)
+    db.push(req.body)
+    fs.writeFileSync("db.json", JSON.stringify(db))
+    res.send({"status":"success"})
 })
 
 app.get('/', (req, res)=> {
