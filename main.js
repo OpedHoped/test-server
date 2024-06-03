@@ -17,16 +17,19 @@ app.use(function (req, res, next) {
     next();
 });
 // app.use(cors(corsOptions))
-app.post('/db', (req, res)=> {
-    const db = JSON.parse(fs.readFileSync("db.json", "utf-8"))
+app.post('/', (req, res)=> {
+    // const db = JSON.parse(fs.readFileSync("db.json", "utf-8"))
     console.log(req.body)
-    db.push(req.body)
-    fs.writeFileSync("db.json", JSON.stringify(db))
+    // db.push(req.body)
+    // fs.writeFileSync("db.json", JSON.stringify(db))
     res.send({"status":"success"})
 })
 
 app.get('/', (req, res)=> {
     res.send(fs.readFileSync("index.html", "utf-8"))
+})
+app.get('/db', (req, res)=> {
+    res.send(fs.readFileSync("db.json", "utf-8"))
 })
 
 app.listen(5155, ()=>  {
