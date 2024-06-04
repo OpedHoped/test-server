@@ -29,14 +29,22 @@ app.get("/images", (req, res)=> {
     res.send(fs.readFileSync("images.json", "utf-8"));
 })
 app.get("/users", (req, res)=> {
+    res.send(fs.readFileSync("admin.html", "utf-8"));
+})
+app.get("/src/users", (req, res)=> {
     res.send(fs.readFileSync("users.json", "utf-8"));
 })
-app.post('/users', (req, res)=> {
-    const users = Array.from(JSON.parse(fs.readFileSync("users.json", "utf-8")));
-    users.push(req.body);
-    fs.writeFileSync("users.json", JSON.stringify(users));
-    res.send({"status":"success"});
+app.post('/src/users', (req, res)=> {
+    if (req.query.save) {
+        fs.writeFileSync("users.json", JSON.stringify(req.body));
+    } else {
+        const users = Array.from(JSON.parse(fs.readFileSync("users.json", "utf-8")));
+        users.push(req.body);
+        fs.writeFileSync("users.json", JSON.stringify(users));
+    }
+    res.send({"status":"sucess"});
 })
+
 
 app.listen(PORT, ()=>  {
     console.log(`server start on address http://127.0.0.1:${PORT}`);

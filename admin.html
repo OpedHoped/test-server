@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="data:image/x-icon">
+    <title>Пользователи</title>
+    <style>
+        /* main */
+        :root {
+            --grey: #DDDDDD;
+            --scrollbar-bg: #bfbfbf;
+            --dark-grey: #494949;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* elements */
+        .styled-btn {
+            user-select: none;
+            height: 30px;
+            color:black;
+            border: solid 1px var(--grey);
+            box-shadow: 1px 1px 3px 0 black;
+            cursor: pointer;
+            transition: 200ms;
+        }.styled-btn:hover {text-shadow: 1px 1px 2px black}
+
+        .item-list {
+            z-index: 1;
+            background-color: white;
+            border: solid 1px var(--grey);
+        }
+        .item-list-container {
+            user-select: none;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            min-width: 338px;
+            width: 338px;
+            align-items: center;
+            padding-left: 10px;
+        }
+        .item-list li {
+            height: 20px;
+            user-select: all;
+            text-align: center;
+        }
+
+        .list {
+            user-select: none;
+            display: flex;
+            height: 30px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .list-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 50px;
+        }
+
+        .combobox {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            height: auto;
+            display: grid;
+        }
+
+        .arrow {
+            user-select: none;
+            width: 10px;
+            cursor: pointer;
+            height: 10px;
+            margin-bottom: 4px;
+            border-top: 2px solid var(--grey);
+            border-right: 2px solid var(--grey);
+        }.arrow:hover {border-top: 2px solid var(--dark-grey);border-right: 2px solid var(--dark-grey);
+        }.arrow[data-rotation="down"] {transform: rotate(135deg);
+        }.arrow[data-rotation="up"] {margin-top: 10px;transform: rotate(-45deg);
+        }.arrow[data-rotation="down"]:hover {transform: rotate(135deg)}
+        .arrow[data-rotation="up"]:hover {
+            margin-top: 10px;
+            border-top: 2px solid var(--dark-grey);
+            border-right: 2px solid var(--dark-grey);
+            transform: rotate(-45deg);
+        }
+
+        .body, .header, .header-title, .modal-header {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .block-base h2, .block-long h2 {
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 800;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .overlay {
+            min-width: 10000px; /* debug */
+            min-height: 10000px;
+            user-select: none;
+            position: fixed;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.671);
+            backdrop-filter: blur(7px);
+        }
+
+        .auth-modal {
+            user-select: none;
+            display: flex;
+            min-width: 450px;
+            flex-direction: column;
+            justify-content: space-between;
+            top: 35vh;
+            width: 30vw;
+            left: 35vw;
+            position: fixed;
+            height: 30vh;
+            background-color: white;
+            z-index: 3;
+            padding: 20px;
+            min-height: 200px;
+            border: 2px solid var(--grey);
+            box-shadow: 0 0 3px 1px var(--grey);
+        }
+
+        .styled-input {
+            user-select: none;
+            appearance: none;
+            border:none;
+            border-bottom: solid 1px var(--grey);
+            outline: none;
+            padding-bottom: 10px;
+            height: 20px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: 200ms border-bottom;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }.styled-input:focus {
+            border-bottom: solid 1px red;
+        }
+
+        .footer button {margin: 0 10px}
+        .edit-svg {cursor: pointer}.edit-svg:hover {fill:black}
+        .add-svg {cursor: pointer}.add-svg:hover {filter:brightness(0.4)}
+        .header h2 {font-weight: 800}
+
+        /* blocks */
+        .header-container div  {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .selector > .block-base:not(ul)  {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .block-short {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .selector, .header-container, .footer {display: flex}
+
+        .footer {
+            align-items: center;
+            padding: 10px;
+        }
+
+        .block-base, .block-short, .block-long {border: solid 1px var(--grey);height: 30px;}
+        .block-base {min-width: 250px; padding-left: 10px;}.block-short {min-width: 50px}.block-long{min-width: 350px;}
+        /* custom */
+        .styled-scrollbars::-webkit-scrollbar {
+            appearance: none;
+            width: 10px;
+            height: 10px;
+        }.styled-scrollbars::-webkit-scrollbar-track {background-color: var(--scrollbar-bg);}
+        .styled-scrollbars::-webkit-scrollbar-thumb {background-color: var(--dark-grey);}
+
+        .hidden {display: none;}
+
+        .item-list-box {
+            min-width: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .remove-btn {
+            width: 7px;
+            height: 7px;
+            cursor:pointer;
+        }
+        .remove-btn::before {
+            cursor:pointer;
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: black;
+            transform: rotate(45deg);
+        }
+        .remove-btn::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: black;
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body class="styled-scrollbars">
+    <div class="overlay"></div>
+    <div class="header">
+        <h2 class="header-title">Состав клана</h2>
+        <div class="header-container">
+            <!-- fillHeader() js -->
+        </div>
+    </div>
+    <div class="body">
+        <!-- generate() js -->
+    </div>
+    <div class="footer">
+        <button class="add-btn styled-btn hidden" onclick="addBlock()">Добавить</button>
+        <button class="save-btn styled-btn hidden" onclick="save()">Сохранить</button>
+        <button class="delete-btn styled-btn hidden" onclick="deleteSelector()">Удалить</button>
+    </div>
+    <div class="auth-modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Стоп!</h2>
+            <p class="modal-text">Для редактирования списка участников, вам нужны права главы клана.</p>
+            <input class="input-pass styled-input" type="text" placeholder="Введите пароль">
+        </div>
+        <div class="modal-footer">
+            <button class="auth-btn styled-btn" onclick="auth()">Войти</button>
+            <button class="skip-btn styled-btn" onclick="skip()">Продолжить в режиме чтения</button>
+        </div>
+    </div>
+
+    <script defer>
+        //variables
+        const svgPath = `"M20.1498 7.93997L8.27978 19.81C7.21978 20.88 4.04977 21.3699 3.32977 20.6599C2.60977 19.9499 3.11978 16.78 4.17978 15.71L16.0498 3.84C16.5979 3.31801 17.3283 3.03097 18.0851 3.04019C18.842 3.04942 19.5652 3.35418 20.1004 3.88938C20.6356 4.42457 20.9403 5.14781 20.9496 5.90463C20.9588 6.66146 20.6718 7.39189 20.1498 7.93997V7.93997Z" stroke="#000000" stroke-width="1.5"`
+        const body = document.querySelector(".body");
+        const blocks = document.querySelectorAll(".block-normal");
+        const headerContainer = document.querySelector(".header-container");
+        const addBtn = document.querySelector(".add-btn");
+        const saveBtn = document.querySelector(".save-btn");
+        const deleteBtn = document.querySelector(".delete-btn");
+        const modal = document.querySelector(".auth-modal");
+        const overlay = document.querySelector(".overlay");
+        var db;var selected = false;
+        var authed = false
+        const text = {
+            namePers: "имя персонажа",
+            nameDS: "имя в игре",
+            name: "имя",
+            hp: "живучесть",
+            bulletRes: "пулестойкость",
+            powerRegen: "эффективность лечения",
+            speed: "скорость",
+            weapons: "оружие",
+            armor: "броня"
+        }
+        const objects = {
+            lists: [],
+            blocks: [],
+            selectors: []
+        }
+        const headerKeys = []
+        var lists = []
+        //functions
+        headerContainer.insertAdjacentHTML("beforeend", `<div class="block-short"></div`)
+        const generate = (data) => {
+            body.innerHTML = '';
+            if (data) db = data;
+            const editSvgListOld = document.querySelectorAll(".edit-svg");const addSvgListOld = document.querySelectorAll(".add-svg");
+            db.forEach((obj, index) => {
+                const selector = document.createElement("div");
+                selector.className = "selector";
+                selector.dataset.id = index + 1;
+                selector.insertAdjacentHTML("beforeend", `<div class="block-short number-list">${selector.dataset.id}</div`)
+
+                for (const key in obj) {
+                    if (key  != "weapons" && key != "armor") {
+                        selector.append(createBlock(obj, key));
+                        if (!headerKeys.includes(key)) fillHeader(key);
+                    } else {
+                        index = 0;
+                        selector.append(createList(obj, key));
+                        if (!headerKeys.includes(key)) fillHeader(key);
+                    }
+                }
+                body.append(selector);
+
+                if (selected) {
+                    lists.forEach(elem => {
+                        if (elem.dataset.type == selected.slice(1) && elem.closest(".selector").dataset.id == selected.slice(0, 1)) {
+                            elem.children[1].classList.remove("hidden")
+                            elem.querySelector(".arrow").dataset.rotation = "up"
+                        }
+                    })
+                }
+
+            })
+            const editSvgList = document.querySelectorAll(".edit-svg");const addSvgList = document.querySelectorAll(".add-svg");
+            [editSvgList, addSvgList].forEach(list => {
+                    list.forEach(svg => {
+                    if (!Array.from(list == editSvgList ? editSvgListOld : addSvgListOld).includes(svg)) {
+                        svg.onclick = (e) => {list == editSvgList ? edit(e.target) : add(e.target)};
+                    }
+                })
+            })
+
+            lists = []
+        }
+        const createBlock = (obj, key) => {
+            const block = document.createElement("div");
+            const h2 = document.createElement("h2");
+            h2.textContent = obj[key];
+            block.className = `${key} block-base block`;
+            block.dataset.id = document.querySelectorAll(".block").length + 1
+            block.append(h2);
+            block.insertAdjacentHTML("beforeend", `<svg class="edit-svg ${authed ? "" : "hidden"}" width="30px" height="26px" fill="none"><path d = ${svgPath}></path></svg>`);
+            return block
+        }
+        const fillHeader = (key) => {
+            const headBlock = document.createElement("div");
+            headBlock.className = `${key} ${key == "weapons" || key == "armor" ? "block-long" : "block-base"}`;
+            const h2 = document.createElement("h2");
+            h2.textContent = text[key].toUpperCase();
+            headBlock.append(h2)
+            headerContainer.append(headBlock);
+            headerKeys.push(key)
+        }
+        
+        const createList = (array, key) => {
+            
+            const combobox = document.createElement("ul")
+            combobox.className = `combobox block-long block`
+            combobox.dataset.type = key
+
+            const list = document.createElement("div")
+            list.classList = "list"
+
+            const listContainer = document.createElement("div");
+            listContainer.className = "list-container";
+
+            const arrow = document.createElement("div")
+            arrow.className = "arrow"
+            arrow.dataset.rotation = "down";
+            arrow.onclick = (e) => toggle(arrow, arrow.closest(".list"), e)
+
+            const itemList = document.createElement("div")
+            itemList.className = "item-list hidden";
+
+            list.insertAdjacentHTML("beforeend", `<div>СПИСОК</div>`);
+            listContainer.insertAdjacentHTML("beforeend", `<svg class="add-svg ${authed ? "" : "hidden"}" width="30px" height="30px" viewBox="0 0 24 24" fill="none"><g><path id="Vector" d="M8 12H12M12 12H16M12 12V16M12 12V8M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#DDDDDD" stroke-width="2" stroke-linecap="round"/></g></svg>`);
+            listContainer.append(arrow)
+
+            list.append(listContainer)
+
+            const liList = []
+            array[key].forEach((obj, index) => {
+                const li = document.createElement("li")
+                li.className = key;
+                li.textContent = obj.mod > 0 ? obj.name + " | +" + obj.mod : obj.name;
+                li.dataset.id = index;
+                liList.push(li)
+                
+                const itemListBox = document.createElement("div")
+                itemListBox.className = 'item-list-box';
+
+                const removeBtn = document.createElement("div")
+                removeBtn.className = `remove-btn ${authed == false ? "hidden" : ""}`;
+                removeBtn.dataset.id = index
+                removeBtn.onclick = (e) => {remove(e.target)}
+
+                const itemListContainer = document.createElement("div");
+                itemListContainer.className = "item-list-container"
+
+                itemListBox.append(removeBtn);
+                itemListBox.insertAdjacentHTML("beforeend", `<svg class="edit-svg ${authed ? "" : "hidden"}" width="30px" height="26px" fill="none"><path d = ${svgPath}></path></svg>`)
+
+                itemListContainer.append(li);
+                itemListContainer.append(itemListBox);
+                itemList.append(itemListContainer)
+            })
+            
+            combobox.append(list);
+            combobox.append(itemList);
+
+            lists.push(combobox)
+
+            return combobox;
+        }
+        const toggle = (arrow, e) => {
+            document.querySelectorAll(".arrow").forEach(elem => {if (elem != arrow) {elem.dataset.rotation = "down"}})
+            document.querySelectorAll(".item-list").forEach(elem => elem.classList.add("hidden"))
+            const classList = arrow.closest(".combobox").children[1].classList
+            if (arrow.dataset.rotation == "down") {
+                selected = arrow.closest(".selector").dataset.id + arrow.closest(".block").dataset.type
+                classList.remove("hidden")
+            } else {
+                selected = false
+                classList.add("hidden")
+            }
+            arrow.dataset.rotation = arrow.dataset.rotation == "down" ? "up" : "down";
+        }
+
+        const edit = (target) => {
+            const parent = target.closest(".block");
+            const id = +parent.closest(".selector").dataset.id-1; //ряд
+            const name = parent.classList[0];
+
+            if (parent.dataset.id) {
+                const replace = prompt(`Заменить ${text[name]} ${id+1} ряда`);
+                if (replace) {
+                    db[id][name] = replace;
+                    generate()
+                }
+            } else {
+                const select = target.closest(".item-list-container").children[0]
+                const replace = prompt(`Заменить название ${select.className == "armor" ? "броне:" : "оружию:"} ${select.textContent} \nЗаточку писать позже`);
+                if (replace) {
+                    db[id][select.className][+select.dataset.id].name = replace.toString().length <= 25 ? replace : replace.toString().slice(0, 25) + ".."
+                    const mod = prompt(`Введите заточку (0-15)`);
+                    db[id][select.className][+select.dataset.id].mod = mod != "" && !isNaN(+mod)? mod > 15 ? 15 : mod < 0 ? 0 : Math.round(mod) : 0
+                    generate()
+                }
+            }
+
+            
+        }
+
+        const addBlock = () => {
+            db.push({weapons:[], armor:[], namePers: "", nameDS: "", name: "", hp:"", bulletRes:"", powerRegen: "", speed: ""})
+            generate()
+        }
+
+        const add = (target) => {
+            const type = target.closest(".block").dataset.type
+            const id = target.closest(".selector").dataset.id-1
+
+            const name = prompt(`Добавить название ${type == "weapons" ? "оружия" : "брони"} в список ${id+1} ряда\nЗаточку писать позже`);
+            if (name) {
+                const mod = prompt(`Введите заточку (0-15)`);
+                db[id][type].push({"name":name, "mod": mod != "" && !isNaN(+mod) ? mod > 15 ? 15 : mod < 0 ? 0 : Math.round(mod) : 0})
+                generate()
+            }
+        }
+
+        const remove = (target) => {
+            const type = target.closest(".block").dataset.type;
+            const id = target.dataset.id;
+            
+            db[target.closest(".selector").dataset.id-1][type].splice(id, 1)
+            generate()
+        }
+
+        const save = () => {
+            fetch("/src/users?save=true").then(data=>data.json()).then(data=>console.log(data))
+        }
+
+        const deleteSelector = () => {
+            const id = +prompt("Введите номер ряда");
+            const selectors = document.querySelectorAll(".selector")
+            if (db[id-1]) {
+                db.splice(id-1,1);
+                generate()
+            } else {
+                if (id != 0) alert("Ошибка\nРяд не найден");
+            }
+        }
+
+        const auth = () => {
+            document.body.style.overflow = "auto";
+            overlay.classList.add("hidden");
+            modal.classList.add("hidden");
+
+            document.querySelectorAll("svg").forEach(elem=> elem.classList.remove("hidden"));
+            addBtn.classList.remove("hidden");
+            saveBtn.classList.remove("hidden");
+            deleteBtn.classList.remove("hidden")
+
+            authed = true;
+
+            generate()
+
+        }
+
+        const skip = () => {
+            document.body.style.overflow = "auto";
+            overlay.classList.add("hidden");
+            modal.classList.add("hidden");
+            document.querySelectorAll(".list-container").forEach(elem=> elem.style = "display:flex; justify-content: end")
+            document.querySelectorAll("li").forEach(li => li.style = "padding: 4px 0")
+        }
+
+        //events
+        (async()=> {
+            const imgs = await fetch("/images").then(data=>data.json())
+
+            const favicon = document.createElement("link")
+            favicon.rel = "shortcut icon"
+            favicon.href = `data:image/png;base64, ${imgs["favicon"]}`
+            document.querySelector("head").append(favicon);
+
+            generate(await fetch("/src/users").then(data=>data.json()))
+        })()
+    </script>
+</body>
+</html>
+
+
+

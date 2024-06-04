@@ -25,7 +25,8 @@
         height: 100vh;
         display: flex;
         align-items: center;
-        overflow: hidden;
+        overflow-y: auto;
+        overflow-x: hidden;
         flex-direction: column;
     }
     /* elements */
@@ -671,7 +672,7 @@
                     }
                     level++;
                     document.querySelector(".footer").classList.add("hidden");
-                    fetch('/users', {
+                    fetch('/src/users', {
                         "method":"POST",
                         "body": JSON.stringify(user),
                         "headers": {"Content-type":"Application/json; charset=UTF-8"}
