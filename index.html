@@ -424,11 +424,13 @@
 </body>
 <script defer>
     //variables
-    var level = 1;var active = false;var role = "next"; var data, maxLevels;
+    var level = localStorage.getItem("cockie") ? 4 : 1;var active = false;var role = "next"; var data, maxLevels;
     const textInputs = {
         elements: [],
         level: []
     };
+
+    if (level == 4) document.querySelector(".footer").classList.add("hidden");
 
     const guide = document.createElement("img");
     const img = document.querySelector(".img")
@@ -490,6 +492,17 @@
     }
 
     //functions
+    const reverseText = (text) => {
+            const letters = { //en - ru
+                "a": "а","b": "в","c": "с","e": "е","k": "к","m": "м","o": "о","p": "р","t": "т","x": "х","y": "у","а": "a","в": "b","с": "c","е": "e","к": "k","м": "m","о": "o","р": "p","т": "t","х": "x","у": "y"
+            }
+            const a = []
+            Array.from(text).forEach(letter => {
+                a.push(letters[letter] ? letters[letter] : letter)
+            })
+            return a.join("")
+        }
+
     const reload = () => {
         FORM.inputs = []
         textInputs.elements.forEach(input=> {
@@ -554,7 +567,6 @@
             carts[1].classList.remove("hidden");
         }
     }
-
     const genCart = (cart) => {
         carts[cart].innerHTML = "";
         const formObj = (cart == 0 ? FORM.weapons : FORM.armor)
@@ -568,7 +580,7 @@
                     genCart(cart)
                 }
                 const li = document.createElement("li");
-                li.textContent = data.mod == 0 ? data.name : `${data.name} | +${data.mod}`;
+                li.textContent = Math.round(data.mod) == 0 ? data.name : `${data.name} | +${Math.round(data.mod)}`;
                 container.append(li);
                 container.append(closeBtn);
                 carts[cart].append(container);
@@ -602,7 +614,7 @@
         const currentList = itemLists[comboBoxesI[0] == active ? 0 : 1]
         const type = Array.from(currentList.classList).includes("armor") ? "armor" : "weapons"
         data[type].forEach((obj, index) => {
-            if (obj.name.toLowerCase().includes(input.value.toLowerCase().trim())) res.push({name:obj.name, rang:obj.rang})
+            if (obj.name.toLowerCase().includes(input.value.toLowerCase().trim()) || obj.name.toLowerCase().includes(reverseText(input.value.toLowerCase()).trim())) res.push({name:obj.name, rang:obj.rang})
         })
         res = {data: res, list: currentList}
         generate(res)
@@ -637,7 +649,7 @@
         focusElement.focus()
     }
 
-    //events
+    //event
     beforeBtn.onclick = () => {
         if (level > 1) {
             level--;reload()
@@ -669,8 +681,10 @@
                         "bulletRes":FORM.inputs[4].value,
                         "powerRegen":FORM.inputs[5].value,
                         "speed":FORM.inputs[6].value,
+                        "party": "",
                     }
                     level++;
+                    localStorage.setItem("cockie", true)
                     document.querySelector(".footer").classList.add("hidden");
                     fetch('/src/users', {
                         "method":"POST",
@@ -705,12 +719,13 @@
     }
 
     textInputs.elements.forEach(input => {
-        input.oninput = () => {
+        input.addEventListener("input", () => {
             if (Array.from(input.closest(".selector").classList).includes("error")) {
                 input.closest(".selector").classList.remove("error");
                 input.closest(".block").children[0].remove()
             }
-        }
+            if (input.value.toString().length > 24) input.value = input.value.toString().slice(0, 24);
+        })
     })
 
     comboBoxesI.forEach(comboBox => {

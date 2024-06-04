@@ -37,7 +37,6 @@
             border: solid 1px var(--grey);
         }
         .item-list-container {
-            user-select: none;
             overflow: hidden;
             display: flex;
             justify-content: space-between;
@@ -48,7 +47,6 @@
         }
         .item-list li {
             height: 20px;
-            user-select: all;
             text-align: center;
         }
 
@@ -111,7 +109,7 @@
         }
 
         .overlay {
-            min-width: 10000px; /* debug */
+            min-width: 15000px; /* debug */
             min-height: 10000px;
             user-select: none;
             position: fixed;
@@ -256,7 +254,7 @@
             <input class="input-pass styled-input" type="text" placeholder="Введите пароль">
         </div>
         <div class="modal-footer">
-            <button class="auth-btn styled-btn" onclick="auth()">Войти</button>
+            <button class="auth-btn styled-btn" onclick="checkAuth()">Войти</button>
             <button class="skip-btn styled-btn" onclick="skip()">Продолжить в режиме чтения</button>
         </div>
     </div>
@@ -272,6 +270,7 @@
         const deleteBtn = document.querySelector(".delete-btn");
         const modal = document.querySelector(".auth-modal");
         const overlay = document.querySelector(".overlay");
+        const inputPass = document.querySelector(".input-pass")
         var db;var selected = false;
         var authed = false
         const text = {
@@ -283,7 +282,8 @@
             powerRegen: "эффективность лечения",
             speed: "скорость",
             weapons: "оружие",
-            armor: "броня"
+            armor: "броня",
+            party: "отряд"
         }
         const objects = {
             lists: [],
@@ -482,7 +482,11 @@
         }
 
         const save = () => {
-            fetch("/src/users?save=true", {method:"POST", body: JSON.stringify(db), headers:"Content-type:application/json;charset=UTF-8"}).then(data=>data.json()).then(data=>console.log(data))
+            fetch("/src/users?save=true", {
+                "method":"POST", 
+                "headers":{"Content-Type":"application/json;charset=utf-8"},
+                "body": JSON.stringify({data:db, pass:localStorage.getItem("coockie")}),
+            }).then(data=>data.json()).then(data=>{alert(data.status)})
         }
 
         const deleteSelector = () => {
@@ -496,20 +500,30 @@
             }
         }
 
+        const checkAuth = () => {
+            fetch("/login", {
+                "method":"POST", 
+                "headers":{"Content-Type":"application/json;charset=utf-8"},
+                "body": JSON.stringify({"data":inputPass.value}),
+            }).then(data=>data.json()).then(data=>{
+                if (data.data) {
+                    auth()
+                } else {
+                    alert("Неверный пароль!")
+                }
+            })
+        }
+        
         const auth = () => {
+            if (!localStorage.getItem("coockie")) localStorage.setItem("coockie", inputPass.value)
             document.body.style.overflow = "auto";
             overlay.classList.add("hidden");
             modal.classList.add("hidden");
-
             document.querySelectorAll("svg").forEach(elem=> elem.classList.remove("hidden"));
             addBtn.classList.remove("hidden");
             saveBtn.classList.remove("hidden");
-            deleteBtn.classList.remove("hidden")
-
+            deleteBtn.classList.remove("hidden");
             authed = true;
-
-            generate()
-
         }
 
         const skip = () => {
@@ -531,6 +545,7 @@
 
             generate(await fetch("/src/users").then(data=>data.json()))
         })()
+        if (localStorage.getItem("coockie")) auth();
     </script>
 </body>
 </html>
