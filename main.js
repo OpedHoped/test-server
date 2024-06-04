@@ -35,7 +35,7 @@ app.post('/users', (req, res)=> {
     const users = Array.from(JSON.parse(fs.readFileSync("users.json", "utf-8")));
     users.push(req.body);
     fs.writeFileSync("users.json", JSON.stringify(users));
-    res.send({"data":users});
+    res.send({"status":"success"});
 })
 
 app.listen(PORT, ()=>  {
