@@ -1,0 +1,31 @@
+[
+    {
+        "weapons": [
+            {
+                "name": "РПЛ-20",
+                "mod": "11"
+            },
+            {
+                "name": "FN SCAR SSR",
+                "mod": "7"
+            }
+        ],
+        "armor": [
+            {
+                "name": "SBA TANK",
+                "mod": "13"
+            },
+            {
+                "name": "Бронекостюм «СКАТ-9б»",
+                "mod": "12"
+            }
+        ],
+        "namePers": "DX_CTRAX_XD",
+        "nameDS": "dmitry0900",
+        "name": "Дмитрий",
+        "hp": "10",
+        "bulletRes": "0",
+        "powerRegen": "86",
+        "speed": "0"
+    }
+]

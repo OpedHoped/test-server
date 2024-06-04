@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/png" href="./favicon.jpg">
+    <link rel="shortcut icon" href="data:image/x-icon">
     <title>Красная армия</title>
 </head>
 <style>
@@ -37,7 +37,7 @@
     }
     .description {
         font-size: 17px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         font-weight: 500;
     }
     .question {
@@ -106,7 +106,7 @@
     }
     .combobox {
         font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        height: 120px;
+        height: 10px;
     }
     .combobox-input {
         font-size: 15px;
@@ -120,33 +120,39 @@
         align-items: center;
         padding: 0 5px;
     }
-
-    .item-list {
+    .item-list_box {
+        height: 100px;
+        z-index: 1;
         user-select: none;
         overflow-x: hidden;
         overflow-y: auto;
         width: 250px;
-        height: 100px;
-        border: solid 1px var(--grey);
+        position: absolute;
+    }
+    .item-list {
+        width: 250px;
+        display: block;
         list-style: none;
         padding: 0;
         margin: 0;
-        display: grid;
+        background-color: white;
+        border-left: solid 1px var(--grey);
     }
-    .item-list::-webkit-scrollbar {
+    .item-list_box::-webkit-scrollbar {
         appearance: none;
         width: 6px;
         
     }
-    .item-list::-webkit-scrollbar-thumb {
+    .item-list_box::-webkit-scrollbar-thumb {
         background-color: var(--dark-grey);
     }
-    .item-list::-webkit-scrollbar-track {
+    .item-list_box::-webkit-scrollbar-track {
         background-color: var(--scrollbar-bg);
     }
     
     .item-list li {
         user-select: none;
+        height: 20px;
         padding: 5px;
     }
     .item-list li:hover {
@@ -186,10 +192,13 @@
         border-radius: 5px;
         border: 1px solid var(--grey);
         margin-bottom: 10px;
+        border-radius: 10px;
     }
 
     .block {
+
         padding: 0px 20px 0 20px;
+
         display: grid;
     }
     .pre-block {
@@ -201,12 +210,69 @@
         display: flex;
         justify-content: space-between;
     }
+    .cart {
+        background-color: white;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 340px;
+        height: 60px;
+        border: solid 1px var(--grey);
+        list-style: none;
+        padding: 0 5px;
+        margin-bottom: 30px;
+        display: block;
+    }
+    .remove-btn {
+        user-select: none;
+        position: relative;
+        right: 10px;
+        width: 10px;
+        cursor: pointer;
+        height: 17px;
+        color: black;
+    }
+    .remove-btn::after {
+        position: absolute;
+        transform: rotate(-45deg);
+        content: "|";
+        margin-left:-1px;
+        font-size: 15px;
+    }
+    .remove-btn::before {
+        position: absolute;
+        transform: rotate(45deg);
+        content: "|";
+        font-size: 15px;
+
+    }
+    .cart li {
+        padding: 6px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .cart::-webkit-scrollbar {
+        appearance: none;
+        width: 6px;
+        
+    }
+    .cart::-webkit-scrollbar-thumb {
+        background-color: var(--dark-grey);
+    }
+    .cart::-webkit-scrollbar-track {
+        background-color: var(--scrollbar-bg);
+    }
+
+    .box-2 {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
     /* options */
     .red {
-        color: var(--red)
+        color: var(--red);
     }
     .line {
-        border-bottom: solid 1px var(--grey)
+        border-bottom: solid 1px var(--grey);
     }
     .color2 {
         color: var(--red);
@@ -217,10 +283,21 @@
         display: none;
     }
 
+    .error {
+        border: 1px solid var(--red);
+    }
+
     .disabled:hover {
         cursor:no-drop;
         text-shadow: none;
     }
+    .light {transition: 300ms;}
+    .light[data-rang="0"] {box-shadow: 0px 0px 3px 2px var(--otmuchka)}
+    .light[data-rang="1"] {box-shadow: 0px 0px 3px 2px var(--novice)}
+    .light[data-rang="2"] {box-shadow: 0px 0px 3px 2px var(--stalker)}
+    .light[data-rang="3"] {box-shadow: 0px 0px 3px 2px var(--veteran)}
+    .light[data-rang="4"] {box-shadow: 0px 0px 3px 2px var(--master)}
+    .light[data-rang="5"] {box-shadow: 0px 0px 3px 2px var(--legenda)}
 
     .item-list li[data-rang="0"] {background-color:var(--otmuchka)}
     .item-list li[data-rang="1"] {background-color:var(--novice)}
@@ -243,22 +320,22 @@
     </div>
     <div class="body">
         <div class="selector" data-level="1">
-            <div class="block block-1">
+            <div class="block">
                 <h2 class="question">Ник в игре<span class="color2"> *</span></h2>
-                <input type="text" class="str-input styled-input" placeholder="Мой ответ">
+                <input data-name="namePers" type="text" class="str-input styled-input" placeholder="Мой ответ">
             </div>
         </div>
         <div class="selector" data-level="1">
-            <div class="block block-2">
+            <div class="block">
                 <h2 class="question">Ник в дискорде (ID)<span class="color2"> *</span></h2>
-                <!-- server img -->
-                <!-- server input -->
+                <div class="img"></div>
+                <input data-name="nameDS" type="text" class="str-input styled-input" placeholder="Мой ответ">
             </div>
         </div>
         <div class="selector" data-level="1">
             <div class="block block-3">
                 <h2 class="question">Имя<span class="color2"> *</span></h2>
-                <input type="text" class="str-input styled-input" placeholder="Мой ответ">
+                <input data-name="name" type="text" class="str-input styled-input" placeholder="Мой ответ">
             </div>
         </div>
         <div class="selector" data-level="2">
@@ -268,206 +345,17 @@
                 <div class="pre-block">
                     <div class="weapon-list combobox">
                         <input class="combobox-input" placeholder="Выберите из списка">
-                        <ul class="item-list weapons hidden">
-                            <li data-rang="0">ПП-91 «Кедр»</li>
-                            <li data-rang="0">Старый «Каштан»</li>
-                            <li data-rang="0">АЕК-919К «Каштан»</li>
-                            <li data-rang="0">Walther MPK</li>
-                            <li data-rang="1">HK MP5</li>
-                            <li data-rang="1">ПП-19 «Бизон-2-01»</li>
-                            <li data-rang="1">ПП-19-01 «Витязь»</li>
-                            <li data-rang="1">ПП-2000</li>
-                            <li data-rang="1">«Цунами»</li>
-                            <li data-rang="2">ППШ</li>
-                            <li data-rang="2">FN P90</li>
-                            <li data-rang="2">СР-2М «Вереск»</li>
-                            <li data-rang="2">«Вереск» Каплана</li>
-                            <li data-rang="2">Spectre M4</li>
-                            <li data-rang="2">HK UMP9</li>
-                            <li data-rang="2">IMI Mini Uzi</li>
-                            <li data-rang="2">HK MP5K</li>
-                            <li data-rang="2">«Гадюка»</li>
-                            <li data-rang="3">TDI KRISS Vector</li>
-                            <li data-rang="3">SIG MPX</li>
-                            <li data-rang="3">Steyr AUG 9mm</li>
-                            <li data-rang="3">ПП «Орех»</li>
-                            <li data-rang="4">Scorpion EVO III</li>
-                            <li data-rang="0">АКС-74У</li>
-                            <li data-rang="0">М16А1</li>
-                            <li data-rang="1">АКС-74</li>
-                            <li data-rang="1">АК-74М</li>
-                            <li data-rang="1">М16А3</li>
-                            <li data-rang="1">М16А2</li>
-                            <li data-rang="2">АКМ</li>
-                            <li data-rang="2">АН-94 «Абакан»</li>
-                            <li data-rang="2">M4A1</li>
-                            <li data-rang="2">Kbk wz. 88 Tantal</li>
-                            <li data-rang="2">AK-105</li>
-                            <li data-rang="2">FN SCAR-L</li>
-                            <li data-rang="2">«Рапира»</li>
-                            <li data-rang="2">«Баланс»</li>
-                            <li data-rang="2">Поношенный SIG SG 550</li>
-                            <li data-rang="2">Поношенный L85A1</li>
-                            <li data-rang="3">L85A1</li>
-                            <li data-rang="3">АКМ «Тишина»</li>
-                            <li data-rang="3">AK-203</li>
-                            <li data-rang="3">M4A1 CQC</li>
-                            <li data-rang="3">АС «Вал»</li>
-                            <li data-rang="3">SIG SG 550</li>
-                            <li data-rang="3">M4 LB</li>
-                            <li data-rang="3">АН-94М «Абакан»</li>
-                            <li data-rang="3">AK-103</li>
-                            <li data-rang="3">АЛК-22 «Стрекоза»</li>
-                            <li data-rang="3">HK G36C</li>
-                            <li data-rang="3">ОЦ-14 «Гроза»</li>
-                            <li data-rang="3">Поношенная HK G3A1</li>
-                            <li data-rang="3">HK G3A1</li>
-                            <li data-rang="3">АЕК-971</li>
-                            <li data-rang="3">FN F2000</li>
-                            <li data-rang="3">ОЦ-14М «Шторм»</li>
-                            <li data-rang="3">9A-91</li>
-                            <li data-rang="3">Steyr AUG A1</li>
-                            <li data-rang="3">HK416</li>
-                            <li data-rang="3">ТКБ-0146М</li>
-                            <li data-rang="3">Steyr AUG A2</li>
-                            <li data-rang="3">Steyr AUG A3 9mm XS</li>
-                            <li data-rang="3">Steyr AUG A3</li>
-                            <li data-rang="3">AK-12</li>
-                            <li data-rang="4">QBZ-191 «Буревестник»</li>
-                            <li data-rang="4">А-545</li>
-                            <li data-rang="4">FN F2000 Tactical</li>
-                            <li data-rang="4">АШ-12</li>
-                            <li data-rang="4">АМ-17</li>
-                            <li data-rang="4">АМБ-17</li>
-                            <li data-rang="4">АК-15</li>
-                            <li data-rang="4">LR-300</li>
-                            <li data-rang="4">FN FAL</li>
-                            <li data-rang="4">HK XM8</li>
-                            <li data-rang="4">FN SCAR-H</li>
-                            <li data-rang="4">FAMAS G2</li>
-                            <li data-rang="4">HK XM8S</li>
-                            <li data-rang="4">HK417</li>
-                            <li data-rang="4">DSA-58</li>
-                            <li data-rang="4">AK-308</li>
-                            <li data-rang="4">IWI Tavor X95</li>
-                            <li data-rang="4">SA-58 CTC</li>
-                            <li data-rang="0">ПБ</li>
-                            <li data-rang="0">ПМ</li>
-                            <li data-rang="0">P-92</li>
-                            <li data-rang="1">ПМ вечного новичка</li>
-                            <li data-rang="1">«Пчела»</li>
-                            <li data-rang="1">ТТ</li>
-                            <li data-rang="2">IMI Micro Uzi</li>
-                            <li data-rang="2">ПММ</li>
-                            <li data-rang="2">Ingram MAC-10</li>
-                            <li data-rang="2">АПС</li>
-                            <li data-rang="2">«Мечта»</li>
-                            <li data-rang="2">Форт-12</li>
-                            <li data-rang="2">Walter P99</li>
-                            <li data-rang="2">Browning Hi-Power</li>
-                            <li data-rang="2">Mauser C96</li>
-                            <li data-rang="3">Glock 18C</li>
-                            <li data-rang="3">МР-412</li>
-                            <li data-rang="3">Beretta 92FS</li>
-                            <li data-rang="3">Beretta 93R</li>
-                            <li data-rang="3">Desert Eagle Mark VII</li>
-                            <li data-rang="3">SW1911</li>
-                            <li data-rang="3">Glock 17</li>
-                            <li data-rang="3">СР-1 «Гюрза»</li>
-                            <li data-rang="3">Поношенный Colt Python</li>
-                            <li data-rang="3">Colt Python</li>
-                            <li data-rang="3">Cobra Two-Tone</li>
-                            <li data-rang="4">Desert Eagle Mark XIX</li>
-                            <li data-rang="4">ОЦ-33 «Пернач»</li>
-                            <li data-rang="4">РШ-12</li>
-                            <li data-rang="4">SIG Sauer P320</li>
-                            <li data-rang="0">Обрез БМ-16</li>
-                            <li data-rang="0">БМ-16</li>
-                            <li data-rang="1">ТОЗ-34</li>
-                            <li data-rang="1">Mossberg 590A1</li>
-                            <li data-rang="1">Shorty 590</li>
-                            <li data-rang="1">МР-133</li>
-                            <li data-rang="2">ТОЗ Деда</li>
-                            <li data-rang="2">Cobray Terminator</li>
-                            <li data-rang="2">M1014</li>
-                            <li data-rang="2">Franchi SPAS-12</li>
-                            <li data-rang="2">MP-153</li>
-                            <li data-rang="3">Grizzly 8.5</li>
-                            <li data-rang="3">Crye Precision SIX12</li>
-                            <li data-rang="3">РМО-93</li>
-                            <li data-rang="3">Chiappa Triple  Crown</li>
-                            <li data-rang="3">Сайга-12К</li>
-                            <li data-rang="3">Protecta</li>
-                            <li data-rang="3">ОЦ-62</li>
-                            <li data-rang="3">МЦ-255</li>
-                            <li data-rang="3">M1014 Breacher</li>
-                            <li data-rang="4">AA-12</li>
-                            <li data-rang="0">Карабин Мосина</li>
-                            <li data-rang="0">СКТ-40</li>
-                            <li data-rang="1">СКС</li>
-                            <li data-rang="1">Поношенная СВТ-40</li>
-                            <li data-rang="1">СВТ-40</li>
-                            <li data-rang="1">Mauser 98k</li>
-                            <li data-rang="1">Винтовка Мосина</li>
-                            <li data-rang="1">«Гром палка» Шамана</li>
-                            <li data-rang="1">Поношенный Winchester M70</li>
-                            <li data-rang="2">СОК-94</li>
-                            <li data-rang="2">АВТ-40</li>
-                            <li data-rang="2">Winchester M70</li>
-                            <li data-rang="2">Steyr Scout</li>
-                            <li data-rang="2">Поношенная СВД</li>
-                            <li data-rang="2">Поношенная M1A</li>
-                            <li data-rang="2">СВД</li>
-                            <li data-rang="2">Поношенная M40A5</li>
-                            <li data-rang="2">M40A5</li>
-                            <li data-rang="3">СВ-98</li>
-                            <li data-rang="3">МЦ-116М</li>
-                            <li data-rang="3">SIG SG 550 Sniper</li>
-                            <li data-rang="3">HK PSG1</li>
-                            <li data-rang="3">«Лавина»</li>
-                            <li data-rang="3">Alpine TPG-1</li>
-                            <li data-rang="3">ВСС «Винторез»</li>
-                            <li data-rang="3">FG-42 «Хлыст»</li>
-                            <li data-rang="3">M1A «Освободитель»</li>
-                            <li data-rang="3">M1A «Защитник»</li>
-                            <li data-rang="3">M1A FA</li>
-                            <li data-rang="3">СВУ</li>
-                            <li data-rang="3">Поношенная L96A1</li>
-                            <li data-rang="4">ВСК-94</li>
-                            <li data-rang="4">FN SCAR SSR</li>
-                            <li data-rang="4">McMillan CS5</li>
-                            <li data-rang="4">ВСС-М «Винторез»</li>
-                            <li data-rang="4">WA2000</li>
-                            <li data-rang="4">L96A1</li>
-                            <li data-rang="4">МЦ-558</li>
-                            <li data-rang="4">ОТЛ-03 «Карбач»</li>
-                            <li data-rang="5">Гаусс-пушка</li>
-                            <li data-rang="5">CR-380</li>
-                            <li data-rang="1">ДП</li>
-                            <li data-rang="2">РПД Дикобраза</li>
-                            <li data-rang="2">РПД Огонька</li>
-                            <li data-rang="2">Поношенная L86A1</li>
-                            <li data-rang="3">РПК</li>
-                            <li data-rang="3">M249 SAW</li>
-                            <li data-rang="3">РПК-16</li>
-                            <li data-rang="3">РПК-74</li>
-                            <li data-rang="3">Поношенный ПКП</li>
-                            <li data-rang="3">L86A1</li>
-                            <li data-rang="3">РПД</li>
-                            <li data-rang="4">ПКП «Печенег»</li>
-                            <li data-rang="4">MG 42</li>
-                            <li data-rang="4">РПЛ-20</li>
-                            <li data-rang="3">Огнемет</li>
-                            <li data-rang="3">«Огниво»</li>
-                            <li data-rang="4">ПТРД-М</li>
-                            <li data-rang="4">«Хладорез»</li>
-                            <li data-rang="1">ДУД «Свеча»</li>
-                            <li data-rang="2">ДУД «Бурят»</li>
-                            <li data-rang="3">ДУД «Эльбрус»</li>
-                        </ul>
+                        <div class="item-list_box hidden">
+                            <ul class="item-list weapons">
+                                <!--  generate() js -->
+                            </ul>
+                        </div>
                     </div>
                     <input class="upgrade-input styled-input" placeholder="Заточка (0 - 15)" type="number">
                     <button class="add-weapon-btn styled-btn disabled">Добавить</button>
+                </div>
+                <div class="cart">
+                    <!-- genCart() js -->
                 </div>
             </div>
         </div>
@@ -478,161 +366,48 @@
                 <div class="pre-block">
                     <div class="armor-list combobox">
                         <input class="combobox-input" placeholder="Выберите из списка">
-                        <ul class="item-list armor hidden">
-                            <li data-rang="0">Куртка с бронежилетом</li>
-                            <li data-rang="0">Плащ</li>
-                            <li data-rang="0">Охотничий плащ</li>
-                            <li data-rang="0">Бандитский плащ</li>
-                            <li data-rang="0">«Смородина»</li>
-                            <li data-rang="1">Комбинезон «КЗ-1»</li>
-                            <li data-rang="1">Бронекостюм «КЗ-2»</li>
-                            <li data-rang="1">Маскировочный костюм</li>
-                            <li data-rang="1">Костюм «Скаут»</li>
-                            <li data-rang="1">Бронекостюм «Берилл-5М»</li>
-                            <li data-rang="1">Бронекостюм «Червь»</li>
-                            <li data-rang="1">Бронекостюм «Страйкер»</li>
-                            <li data-rang="1">Защитный костюм «Псарь»</li>
-                            <li data-rang="1">Поношенный «Траппер»</li>
-                            <li data-rang="1">Костюм «Траппер»</li>
-                            <li data-rang="2">Лечебный Берилл</li>
-                            <li data-rang="2">Комплект «Алтын»</li>
-                            <li data-rang="2">Бронекостюм «КЗ-3а»</li>
-                            <li data-rang="2">Бронекостюм «Рысь»</li>
-                            <li data-rang="2">Поношенный «Гоплит»</li>
-                            <li data-rang="2">Бронекостюм «Гоплит»</li>
-                            <li data-rang="2">Поношенная «Ворса»</li>
-                            <li data-rang="2">Защитный костюм «Ворса»</li>
-                            <li data-rang="2">Поношенный «Восход»</li>
-                            <li data-rang="3">Броня репортера</li>
-                            <li data-rang="3">Бронекостюм «КЗ-3б»</li>
-                            <li data-rang="3">Тяжелый комплект «Алтын-Т»</li>
-                            <li data-rang="3">«Туманный охотник»</li>
-                            <li data-rang="3">«Идущий в метели»</li>
-                            <li data-rang="3">Экзоскелет «Абориген»</li>
-                            <li data-rang="3">Бронекостюм «Йорш»</li>
-                            <li data-rang="3">Экзоскелет «Медведь»</li>
-                            <li data-rang="3">«Призрачный охотник»</li>
-                            <li data-rang="3">Экзоброня «Крысолов»</li>
-                            <li data-rang="3">Экзоскелет «Гренадер»</li>
-                            <li data-rang="3">Бронекостюм «Восход»</li>
-                            <li data-rang="3">Бронекостюм «Громила»</li>
-                            <li data-rang="3">Поношенный Экзоскелет</li>
-                            <li data-rang="3">Экзоскелет Морга</li>
-                            <li data-rang="3">Экзоскелет Искателя</li>
-                            <li data-rang="3">Экзоскелет</li>
-                            <li data-rang="3">Бронекостюм «Легионер»</li>
-                            <li data-rang="3">Поношенный «Ош»</li>
-                            <li data-rang="3">Защитный костюм «Ош»</li>
-                            <li data-rang="3">Экзоброня «Егерь»</li>
-                            <li data-rang="3">Поврежденный «Центурион»</li>
-                            <li data-rang="4">Мод. экзоскелет</li>
-                            <li data-rang="4">SBA TANK</li>
-                            <li data-rang="4">Бронекостюм «КЗ-4»</li>
-                            <li data-rang="4">Поношенный «Мул»</li>
-                            <li data-rang="4">Экзоскелет «Мул»</li>
-                            <li data-rang="4">Поношенный «Центурион»</li>
-                            <li data-rang="4">Бронескелет «Центурион»</li>
-                            <li data-rang="4">Бронекостюм «Гранит»</li>
-                            <li data-rang="4">Бронекостюм «Авангард»</li>
-                            <li data-rang="4">Поношенный «Зверобой»</li>
-                            <li data-rang="4">Экзоброня «Зверобой»</li>
-
-                            <li data-rang="0">Дождевик</li>
-                            <li data-rang="0">ИП-4м</li>
-                            <li data-rang="1">Продвинутый ОЗК</li>
-                            <li data-rang="1">Комбинезон «Заря-Б»</li>
-                            <li data-rang="1">Банд. костюм с баллонами</li>
-                            <li data-rang="1">Поношенный КИМ-99</li>
-                            <li data-rang="1">КИМ-99 «Янтарь»</li>
-                            <li data-rang="2">КИМ-105 «Топаз»</li>
-                            <li data-rang="2">КИМ-113 «Иолит»</li>
-                            <li data-rang="2">КИМ-116 «Изумруд»</li>
-                            <li data-rang="2">КИМ-100 «Гранат»</li>
-                            <li data-rang="2">КИМ-102 «Циркон»</li>
-                            <li data-rang="2">КИМ-85Д</li>
-                            <li data-rang="2">Поношенный КИМ-99М</li>
-                            <li data-rang="2">КИМ-99М «Малахит»</li>
-                            <li data-rang="3">КИМ-122 «Аметист»</li>
-                            <li data-rang="3">Комбинезон «Магнит»</li>
-                            <li data-rang="3">Комбинезон «Тонга»</li>
-                            <li data-rang="3">Поношенная «Сева»</li>
-                            <li data-rang="3">Комбинезон «Сева»</li>
-                            <li data-rang="3">Комбинезон «Жнец»</li>
-                            <li data-rang="3">Поврежденный «Сатурн»</li>
-                            <li data-rang="4">КИМ-Х «Атлас»</li>
-                            <li data-rang="4">Поношенный «Сатурн»</li>
-                            <li data-rang="4">Комбинезон «Сатурн»</li>
-
-                            <li data-rang="0">Костюм «Горка-3»</li>
-                            <li data-rang="0">Комбинезон «Заря»</li>
-                            <li data-rang="0">Болотная «Заря»</li>
-                            <li data-rang="0">Бандитский костюм</li>
-                            <li data-rang="0">ЗК-1 «Отмычка»</li>
-                            <li data-rang="1">АО-1 «Бродяга»</li>
-                            <li data-rang="1">Поношенный АО-2</li>
-                            <li data-rang="1">АО-2 «Странник»</li>
-                            <li data-rang="1">«Заря» с противогазом</li>
-                            <li data-rang="1">Банд.костюм с противогазом</li>
-                            <li data-rang="1">Поношенный «Турист»</li>
-                            <li data-rang="1">Комбинезон «Турист»</li>
-                            <li data-rang="1">Поношенный «Клептоман»</li>
-                            <li data-rang="1">Костюм «Клептоман»</li>
-                            <li data-rang="2">Поношенный АО-3</li>
-                            <li data-rang="2">АО-3 «Искатель»</li>
-                            <li data-rang="2">Поношенный «Сокол»</li>
-                            <li data-rang="2">Бронекостюм «Сокол»</li>
-                            <li data-rang="2">Бронекостюм «Пересмешник»</li>
-                            <li data-rang="3">«Альбатрос-Разведчик»</li>
-                            <li data-rang="3">«Альбатрос-Лазутчик»</li>
-                            <li data-rang="3">УКАЗ «Спаннер»</li>
-                            <li data-rang="3">Костюм «Экспедиция»</li>
-                            <li data-rang="3">Поношенный АО-4</li>
-                            <li data-rang="3">УКАЗ АО-4 «Рейдер»</li>
-                            <li data-rang="3">УКАЗ АО-5 «Пилигрим»</li>
-                            <li data-rang="3">Поношенный «ПСЗ-10»</li>
-                            <li data-rang="3">Бронекостюм «ПСЗ-10»</li>
-                            <li data-rang="3">Бронекостюм «Пахан»</li>
-                            <li data-rang="3">Бронекостюм «Булат-м»</li>
-                            <li data-rang="3">Поношенный «СКАТ-9б»</li>
-                            <li data-rang="3">Поношенный «СКАТ-9м»</li>
-                            <li data-rang="4">Экзоброня JS ZIVCAS 2A</li>
-                            <li data-rang="4">Комбинезон «Ригель»</li>
-                            <li data-rang="4">Поношенный АО-6</li>
-                            <li data-rang="4">УКАЗ АО-6 «Кочевник»</li>
-                            <li data-rang="4">Бронекостюм «СКАТ-9б»</li>
-                            <li data-rang="4">Бронекостюм «СКАТ-9м»</li>
-                            <li data-rang="4">Бронекостюм «СКАТ-10»</li>
-                            <li data-rang="5">«Альбатрос-Штурмовик»</li>
-
-                        </ul>
+                        <div class="item-list_box  hidden">
+                            <ul class="item-list armor">
+                                <!--  generate() js -->
+                            </ul>
+                        </div>
                     </div>
                     <input class="upgrade-input styled-input" placeholder="Заточка (0 - 15)" type="number">
                     <button class="add-armor-btn styled-btn disabled">Добавить</button>
+                </div>
+                <div class="cart">
+                    <!-- genCart() js -->
                 </div>
             </div>
         </div>
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Живучесть в сборке<span class="color2"> *</span></h2>
-                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
+                <input data-name="hp" class="property-input styled-input" placeholder="Ваш ответ" type="number">
             </div>
         </div>
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Пулестойкость в сборке<span class="color2"> *</span></h2>
-                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
+                <input data-name="bulletRes" class="property-input styled-input" placeholder="Ваш ответ" type="number">
             </div>
         </div>
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Эффективность лечения в сборке<span class="color2"> *</span></h2>
-                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
+                <input data-name="powerRegen" class="property-input styled-input" placeholder="Ваш ответ" type="number">
             </div>
         </div>
         <div class="selector" data-level="3">
             <div class="block">
                 <h2 class="question">Скорость в сборке<span class="color2"> *</span></h2>
-                <input class="property-input styled-input" placeholder="Ваш ответ" type="number">
+                <input data-name="speed" class="property-input styled-input" placeholder="Ваш ответ" type="number">
+            </div>
+        </div>
+        <div class="selector" data-level="4">
+            <div class="block block-1">
+                <h2 class="question">Данные записаны</h2>
+                <h2 class="description">Удачной игры!</h3>
             </div>
         </div>
     </div>
@@ -647,9 +422,15 @@
     </div>
 </body>
 <script defer>
-    var level = 1
-    const favicon = document.createElement("img");
+    //variables
+    var level = 1;var active = false;var role = "next"; var data, maxLevels;
+    const textInputs = {
+        elements: [],
+        level: []
+    };
+
     const guide = document.createElement("img");
+    const img = document.querySelector(".img")
     const nextBtn = document.querySelector(".next-btn");
     const beforeBtn = document.querySelector(".before-btn");
     const selectors = document.querySelectorAll(".selector");
@@ -657,38 +438,62 @@
     const block2 = document.querySelector(".block-2");
     const bar = document.querySelector(".progress-bar_before");
     const upgradeInputs = document.querySelectorAll(".upgrade-input");
-    console.log(bar);
     const barDescr = document.querySelector(".footer").querySelector(".description");
+    const favicon = document.createElement("link");
+    const wpnList = document.querySelector(".weapons");
+    const armorList = document.querySelector(".armor");
+    const comboBoxesI = document.querySelectorAll(".combobox-input");
+    const itemLists = document.querySelectorAll(".item-list");
+    const itemListBoxes = document.querySelectorAll(".item-list_box")
+    const restartBtn = document.querySelector(".restart-btn");
+    const addArmorBtn = document.querySelector(".add-armor-btn");
+    const addWeaponBtn = document.querySelector(".add-weapon-btn");
+    const inputs = document.querySelectorAll("input")
+    const carts = document.querySelectorAll(".cart");
+    const propInputs = document.querySelectorAll(".property-input");
     
-    (async()=> {
-        const data = await fetch("/images").then(data=>data.json())
-        guide.src = `data:image/png;base64, ${data["guide-1"]}`
-        guide.className = "styled-img"
-        favicon.src = `data:image/png;base64, ${data["favicon"]}`
-    })()
-    nextBtn.role = "next"
-    input1.className = "str-input styled-input"
-    input1.placeholder = "Мой ответ"
-    input1.type = "text"
-    block2.append(guide);
-    block2.append(input1);
+    //options
+    selectors.forEach(selector => {
+        const res = [];
+        res.push(+selector.dataset["level"]);
+        res.sort((a,b)=> a-b);
+        maxLevels = res[res.length-1]
+    })
+    
+    inputs.forEach(input=> {
+        if (input.className != "combobox-input" && Array.from(input.classList).indexOf("upgrade-input") == -1) {
+            textInputs.elements.push(input)
+            textInputs.level.push(input.closest(".selector").dataset["level"])
+        }
+    });
 
-    //events
-    nextBtn.onclick = () => {
-        if (nextBtn.role == "next") {
-            if (level < 3) {
-                level++;restartWindow()
-            }
-        } else {
-            //post
-        }
+    (async()=> {
+        const imgs = await fetch("/images").then(data=>data.json())
+        data = await fetch("/db").then(data=>data.json())
+
+        guide.src = `data:image/png;base64, ${imgs["guide-1"]}`
+        guide.className = "styled-img"
+
+        favicon.rel = "shortcut icon"
+        favicon.href = `data:image/png;base64, ${imgs["favicon"]}`
+
+        document.querySelector("head").append(favicon);img.append(guide);
+        generate();
+    })()
+    
+
+    const FORM = {
+        inputs: [],
+        weapons: [],
+        armor: []
     }
-    beforeBtn.onclick = () => {
-        if (level > 1) {
-            level--;restartWindow()
-        }
-    }
-    const restartWindow = () => {
+
+    //functions
+    const reload = () => {
+        FORM.inputs = []
+        textInputs.elements.forEach(input=> {
+            FORM.inputs.push({value:input.value, name:input.dataset["name"]})
+        })
         selectors.forEach(selector=> {
             selector.style.display = +selector.dataset["level"] != level ? "none" : "block"
             if (!selector.dataset["level"]) selector.style.display = "block"
@@ -698,23 +503,253 @@
         } else {
             beforeBtn.classList.add("hidden")
         }
-        if (level > 2) {
+        if (level >= maxLevels - 1) {
             nextBtn.textContent = "Отправить"
-            nextBtn.role = "submit"
+            role = "submit"
         } else {
             nextBtn.textContent = "Далее"
-            nextBtn.role = "next"
+            role = "next"
         }
-        console.log()
-        bar.style = `width: ${Math.round(200/(4-level))}px;`
-        barDescr.textContent = level + " из 3";
+        bar.style = `width: ${Math.round(200/(maxLevels-level))}px;`
+        barDescr.textContent = level + " из " + (+maxLevels-1);
+        if (active) {
+            if (active == comboBoxesI[0]) { //weapons
+                itemListBoxes[0].classList.remove("hidden");
+                itemListBoxes[1].classList.add("hidden");
+            } else { //armor
+                itemListBoxes[1].classList.remove("hidden");
+                itemListBoxes[0].classList.add("hidden");
+            }
+        } else {
+            itemListBoxes[0].classList.add("hidden");
+            itemListBoxes[1].classList.add("hidden");
+        }
+        
+        upgradeInputs.forEach(input=> {
+            if (input.value < 0) input.value = 0
+            if (input.value > 15) input.value = 15
+        })
+
+        if (upgradeInputs[0].value != "" && comboBoxesI[0].placeholder != "Выберите из списка") {
+            addWeaponBtn.classList.remove("disabled")
+        } else {
+            addArmorBtn.classList.add("disabled")
+        }
+
+        if (upgradeInputs[1].value != "" && comboBoxesI[1].placeholder != "Выберите из списка") {
+            addArmorBtn.classList.remove("disabled")
+        } else {
+            addArmorBtn.classList.add("disabled")
+        }
+
+        if (FORM.weapons.length == 0) {
+            carts[0].classList.add("hidden");
+        } else {
+            carts[0].classList.remove("hidden");
+        }
+        if (FORM.armor.length == 0) {
+            carts[1].classList.add("hidden");
+        } else {
+            carts[1].classList.remove("hidden");
+        }
     }
-    restartWindow()
-    upgradeInputs.forEach(input=>{
+
+    const genCart = (cart) => {
+        carts[cart].innerHTML = "";
+        const formObj = (cart == 0 ? FORM.weapons : FORM.armor)
+        formObj.forEach((data, index)=> {
+                const container = document.createElement("div");
+                container.className = "box-2";
+                const closeBtn = document.createElement("div");
+                closeBtn.className = "remove-btn";
+                closeBtn.onclick = () => {
+                    formObj.splice(index, 1)
+                    genCart(cart)
+                }
+                const li = document.createElement("li");
+                li.textContent = data.mod == 0 ? data.name : `${data.name} | +${data.mod}`;
+                container.append(li);
+                container.append(closeBtn);
+                carts[cart].append(container);
+        })
+    }
+
+    const generate = (opt) => {
+        itemLists[0].innerHTML = ""; itemLists[1].innerHTML = "";
+        (opt ? [""] : ["weapons", "armor"]).forEach((type, index) => {
+            (opt ? opt.data : data[type]).sort((a,b)=> a.rang-b.rang);
+            (opt ? opt.data : data[type]).forEach(obj => {
+                const li = document.createElement("li")
+                li.dataset["rang"] = obj.rang;
+                li.textContent = obj.name;
+                (opt ? opt.list : itemLists[index]).append(li);
+            })
+            if ((opt ? opt.list : itemLists[index]).children.length == 0) {
+                const li = document.createElement("li")
+                li.textContent = "Ничего не найдено";
+                (opt ? opt.list : itemLists[index]).append(li)
+            }
+        })
+        
+    }
+
+    const sortList = (input) => {
+        if (input.value.trim() == "") {
+            generate()
+        }
+        var res = []
+        const currentList = itemLists[comboBoxesI[0] == active ? 0 : 1]
+        const type = Array.from(currentList.classList).includes("armor") ? "armor" : "weapons"
+        data[type].forEach((obj, index) => {
+            if (obj.name.toLowerCase().includes(input.value.toLowerCase().trim())) res.push({name:obj.name, rang:obj.rang})
+        })
+        res = {data: res, list: currentList}
+        generate(res)
+    }
+
+    const resetForm = () => {
+        comboBoxesI[0].classList.remove("light");comboBoxesI[1].classList.remove("light");
+        comboBoxesI[0].placeholder = "Выберите из списка";comboBoxesI[1].placeholder = "Выберите из списка";
+        for (const input of inputs) {
+            if (input.className != "combobox-input") {
+                input.value = ""
+            }
+        }
+        FORM.weapons = [];
+        FORM.armor = [];
+        FORM.inputs = [];
+        level = 1
+        reload()
+    }
+
+    const error = (focusElement) => {
+        const currentBlock = focusElement.closest(".block");
+        if (!Array.from(currentBlock.closest(".selector").classList).includes("error")) {
+            const warn = document.createElement("h2");
+            warn.className = "description red";
+            var type;
+            if (level == 2) {type = focusElement.closest(".combobox").classList[0] == "weapon-list" ? "оружие" : "броню"}
+            warn.textContent = level == 2 ? "! Добавьте хотябы 1 " + type :  "! Это обязательный вопрос."
+            currentBlock.closest(".selector").classList.add("error")
+            currentBlock.prepend(warn)
+        }
+        focusElement.focus()
+    }
+
+    //events
+    beforeBtn.onclick = () => {
+        if (level > 1) {
+            level--;reload()
+        }
+    }
+
+    nextBtn.onclick = () => {
+        const a = []
+        const firstElem = textInputs.level.join("").indexOf(level.toString())
+        const elemsCount = textInputs.level.join("").lastIndexOf(level.toString())
+        if (level != 2) {
+            for (let i = 0; i <= elemsCount-firstElem; i++) {
+                a.push(textInputs.elements[i+firstElem].value.trim() != "")
+            }
+            const focusElement = textInputs.elements[firstElem + a.indexOf(false)]
+            if (a.indexOf(false) == -1) {
+                if (role == "next") {
+                    if (level-1 < maxLevels) {
+                        level++;reload();
+                    } 
+                } else {
+                    const user = { //parse FORM
+                        "weapons": FORM.weapons,
+                        "armor": FORM.armor,
+                        "namePers":FORM.inputs[0].value,
+                        "nameDS":FORM.inputs[1].value,
+                        "name":FORM.inputs[2].value,
+                        "hp":FORM.inputs[3].value,
+                        "bulletRes":FORM.inputs[4].value,
+                        "powerRegen":FORM.inputs[5].value,
+                        "speed":FORM.inputs[6].value,
+                    }
+                    level++;
+                    document.querySelector(".footer").classList.add("hidden");
+                    fetch('/users', {
+                        "method":"POST",
+                        "body": JSON.stringify(user),
+                        "headers": {"Content-type":"Application/json; charset=UTF-8"}
+                    }).then(data=>data.text()).then(data=>console.log(data))
+                }
+                
+            } else {
+                error(focusElement)
+            }
+        } else {
+            if (FORM.weapons.length > 0) {
+                if (FORM.armor.length > 0) {
+                    level++;reload();
+                } else {
+                    error(comboBoxesI[1])
+                }
+            } else {
+                error(comboBoxesI[0])
+            }
+        }
+    }
+
+    window.onclick = (e) => {
+        if (!e.target.closest(".combobox")) {
+            itemListBoxes[0].scrollTo(0, 0);itemListBoxes[1].scrollTo(0, 0);
+            active = false;
+            comboBoxesI[0].value = "";comboBoxesI[1].value = "";
+            reload();
+        }
+    }
+
+    textInputs.elements.forEach(input => {
         input.oninput = () => {
-            if (input.value > 15) input.value = 15;
-            if (input.value < 0) input.value = 0;
+            if (Array.from(input.closest(".selector").classList).includes("error")) {
+                input.closest(".selector").classList.remove("error");
+                input.closest(".block").children[0].remove()
+            }
         }
     })
+
+    comboBoxesI.forEach(comboBox => {
+        comboBox.onclick = () => {
+            active = comboBox;
+            comboBox.value = "";reload();generate()
+        }
+        comboBox.oninput = () => sortList(comboBox)
+    })
+
+    itemLists.forEach(itemList=> {
+        itemList.onclick = (e) => {
+            if (e.target != itemListBoxes) {
+                active.value = "";
+                active.placeholder = e.target.textContent
+                active.classList.add("light"); active.dataset["rang"] = e.target.dataset["rang"]
+                active = false;reload()
+            }
+        }
+    });
+
+    [addWeaponBtn, addArmorBtn].forEach((elem, index) => {
+        elem.onclick = () => {
+            if (!Array.from(elem.classList).includes("disabled")) {
+                if (Array.from(elem.closest(".selector").classList).includes("error")) {
+                    elem.closest(".selector").classList.remove("error")
+                    elem.closest(".block").children[0].remove()
+                }
+                (index == 0 ? FORM.weapons : FORM.armor).push({name:comboBoxesI[index].placeholder, mod: upgradeInputs[index].value});reload();
+                upgradeInputs[index].value = ""
+                comboBoxesI[index].placeholder = "Выберите из списка"
+                comboBoxesI[index].classList.remove("light")
+                genCart(index)
+                reload()
+            }
+        }
+    })
+    restartBtn.onclick = () => confirm("Уверены?") ? resetForm() : null;
+    upgradeInputs.forEach(input => input.oninput = () => reload());
+
+    reload()
 </script>
 </html>
