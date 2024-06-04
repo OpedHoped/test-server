@@ -482,7 +482,7 @@
         }
 
         const save = () => {
-            fetch("/src/users?save=true").then(data=>data.json()).then(data=>console.log(data))
+            fetch("/src/users?save=true", {method:"POST", body: JSON.stringify(db), headers:"Content-type:application/json;charset=UTF-8"}).then(data=>data.json()).then(data=>console.log(data))
         }
 
         const deleteSelector = () => {
