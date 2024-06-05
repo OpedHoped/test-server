@@ -303,6 +303,7 @@
         const loadOverlay = document.querySelector(".load-overlay");
         var db;var selected = false;var listLength = 0;
         var authed = false
+        const defaultObj = {"убийства": 0,"смерти": 0,"помощи": 0,"счёт": 0}
         const objects = {
             lists: [],
             blocks: [],
@@ -479,7 +480,7 @@
                 Object.defineProperty(emptyDb, name, {value: "", enumerable: true, writable: true, configurable: true})   
             }
             emptyDb.kv = [];
-            for (let i = 0; i < db[0].kv.length; i++) emptyDb.kv.push({"убийства": 0,"смерти": 0,"помощи": 0,"счёт": 0});
+            for (let i = 0; i < db[0].kv.length; i++) emptyDb.kv.push(defaultObj);
             db.push(emptyDb)
             console.log(db);
             generate()
@@ -491,9 +492,10 @@
                     if (data.kv.length > 0) {
                         const date = new Date(data.kv[data.kv.length-1].date)
                     const parseData = new Date(date.getTime()+86400000).toLocaleString([], {year:"numeric", month: '2-digit', day:'2-digit'}).split(".")
-                    data.kv.push({date: `${parseData[1]}-${parseData[0]}-${parseData[2]}`})
+                    data.kv.push({...defaultObj,date: `${parseData[1]}-${parseData[0]}-${parseData[2]}`})
                     } else {
-                        data.kv.push({date: "06-01-2024"})
+                        console.log(data.kv);
+                        data.kv.push({...defaultObj, date:"06-01-2024"})
                     }
 
                     generate()
