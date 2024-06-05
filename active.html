@@ -366,7 +366,6 @@
                 }
 
             })
-            console.log(authed ? "" : "hidden");
             const editSvgList = document.querySelectorAll(".edit-svg");const addSvgList = document.querySelectorAll(".add-svg");
             [editSvgList, addSvgList].forEach(list => {
                     list.forEach(svg => {
@@ -490,7 +489,6 @@
                     generate()
                 }
             }
-            console.log(db);
         }
 
         const addBlock = () => {
@@ -501,7 +499,6 @@
             emptyDb.kv = [];
             for (let i = 0; i < db[0].kv.length; i++) emptyDb.kv.push({});
             db.push(emptyDb)
-            console.log(db);
             generate()
         }
         const addList = () => {
@@ -530,7 +527,6 @@
         const removeList = () => {
             const keys = []
             for (let key in db[0]) {
-                console.log(key);
                 if (db[0][key].length != 0) {
                     keys.push(key);
                 } else {
@@ -581,7 +577,6 @@
                 "headers":{"Content-Type":"application/json;charset=utf-8"},
                 "body": JSON.stringify({data:db, pass:localStorage.getItem("coockie")}),
             }).then(data=>data.json()).then(data=>{alert(data.status)})
-            console.log(localStorage.getItem("coockie"));
         }
 
         const deleteSelector = () => {
