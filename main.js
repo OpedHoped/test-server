@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const fs = require("fs")
 const PORT = 5549
 
-const authPass = "_b4tib_an0Zad2_" //пароль для входа
+const authPass = "__9zkeuLAK" //пароль для входа
 
 const corsOptions = {
 	origin: '*',
