@@ -759,7 +759,7 @@
         itemList.onclick = (e) => {
             if (e.target != itemListBoxes) {
                 active.value = "";
-                active.placeholder = e.target.textContent
+                if (e.target.dataset.rang) active.placeholder = e.target.textContent;
                 active.classList.add("light"); active.dataset["rang"] = e.target.dataset["rang"]
                 active = false;reload()
             }
