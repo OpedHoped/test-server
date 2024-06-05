@@ -775,6 +775,7 @@
                 }
                 (index == 0 ? FORM.weapons : FORM.armor).push({name:comboBoxesI[index].placeholder, mod: upgradeInputs[index].value});reload();
                 upgradeInputs[index].value = ""
+                elem.classList.add("disabled")
                 comboBoxesI[index].placeholder = "Выберите из списка"
                 comboBoxesI[index].classList.remove("light")
                 genCart(index)
