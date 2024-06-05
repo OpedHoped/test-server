@@ -21,6 +21,9 @@
         }
 
         /* elements */
+        .remove-list-btn, .add-list-btn {
+            min-width: 30px;
+        }
         .load-overlay {
             min-width: 15000px; /* debug */
             min-height: 10000px;
@@ -320,9 +323,10 @@
         const headerKeys = []
         var lists = []
         //functions
-        headerContainer.insertAdjacentHTML("beforeend", `<div class="block-short"></div`)
         const generate = (data) => {
             body.innerHTML = '';
+            headerContainer.innerHTML = '';
+            headerContainer.insertAdjacentHTML("beforeend", `<div class="block-short"></div`)
             if (data) db = data;
             const editSvgListOld = document.querySelectorAll(".edit-svg");const addSvgListOld = document.querySelectorAll(".add-svg");
             db.forEach((obj, index) => {
@@ -334,11 +338,10 @@
                 for (const key in obj) {
                     if (key  != "weapons" && key != "armor") {
                         selector.append(createBlock(obj, key));
-                        if (!headerKeys.includes(key)) fillHeader(key);
+                        if (index == 0) fillHeader(key);
                     } else {
-                        index = 0;
                         selector.append(createList(obj, key));
-                        if (!headerKeys.includes(key)) fillHeader(key);
+                        if (index == 0) fillHeader(key);
                     }
                 }
                 body.append(selector);
@@ -361,6 +364,9 @@
                     }
                 })
             })
+
+            headerContainer.insertAdjacentHTML("beforeend", `<button class="remove-list-btn styled-btn ${authed ? "" : "hidden"}" onclick="removeList()">-</button`);
+            headerContainer.insertAdjacentHTML("beforeend", `<button class="add-list-btn styled-btn ${authed ? "" : "hidden"}" onclick="addList()">+</button`);
 
             lists = []
         }
@@ -385,7 +391,6 @@
         }
         
         const createList = (array, key) => {
-            
             const combobox = document.createElement("ul")
             combobox.className = `combobox block-long block`
             combobox.dataset.type = key
@@ -484,7 +489,15 @@
         }
 
         const addBlock = () => {
-            db.push({weapons:[], armor:[], namePers: "", nameDS: "", name: "", hp:"", bulletRes:"", powerRegen: "", speed: ""})
+            const obj = {}
+            obj.armor = [];
+            obj.weapons = [];
+            for (let key in db[0])  {
+                if (key != "weapons" && key != "armor") {
+                    Object.defineProperty(obj, key, {value: "", enumerable:true, writable:true, configurable:true});
+                }
+            }
+            db.push(obj)
             generate()
         }
 
@@ -508,6 +521,30 @@
             generate()
         }
 
+        const addList = () => {
+            const name = prompt("Введите название блока");
+            if (name) {
+                db.forEach(obj => {
+                    Object.defineProperty(text, name, {value: name, configurable:true, enumerable:true, writable:true});
+                    Object.defineProperty(obj, name, {value: "", configurable:true, enumerable:true, writable:true});
+                })
+                generate()
+            }
+        }
+        const removeList = () => {
+            const keys = []
+            for (let key in db[0]) {
+                
+                if (key != "weapons" && key != "armor") keys.push(key);
+            }
+            if (keys.length > 0) {
+                db.forEach(obj => {
+                    delete obj[keys[keys.length-1]];
+                })
+                generate()
+            }
+        }
+
         const save = () => {
             fetch("/src/users?save=true", {
                 "method":"POST", 
@@ -527,11 +564,15 @@
             }
         }
 
-        const checkAuth = () => {
+        const checkAuth = (pass) => {
+            if (!pass) {
+                pass = inputPass.value;
+                localStorage.setItem("coockie", inputPass.value)
+            }
             fetch("/login", {
                 "method":"POST", 
                 "headers":{"Content-Type":"application/json;charset=utf-8"},
-                "body": JSON.stringify({"data":inputPass.value}),
+                "body": JSON.stringify({"data":pass}),
             }).then(data=>data.json()).then(data=>{
                 if (data.data) {
                     auth()
@@ -550,6 +591,9 @@
             addBtn.classList.remove("hidden");
             saveBtn.classList.remove("hidden");
             deleteBtn.classList.remove("hidden");
+            document.querySelectorAll(".remove-btn").forEach(btn=>btn.classList.remove("hidden"));
+            document.querySelector(".add-list-btn").classList.remove("hidden");
+            document.querySelector(".remove-list-btn").classList.remove("hidden");
             authed = true;
         }
 
@@ -574,8 +618,8 @@
             document.body.style.overflow = "auto";
 
             generate(await fetch("/src/users").then(data=>data.json()))
+            if (localStorage.getItem("coockie")) checkAuth(localStorage.getItem("coockie"));
         })()
-        if (localStorage.getItem("coockie")) auth();
     </script>
 </body>
 </html>
