@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const fs = require("fs")
 const PORT = 5549
 
-const authPass = "@b4tib-an0Zad2_" //пароль для входа
+const authPass = "_b4tib_an0Zad2_" //пароль для входа
 
 const corsOptions = {
 	origin: '*',
@@ -33,8 +33,14 @@ app.get("/images", (req, res)=> {
 app.get("/users", (req, res)=> {
     res.send(fs.readFileSync("admin.html", "utf-8"));
 })
+app.get("/active", (req, res)=> {
+    res.send(fs.readFileSync("active.html", "utf-8"));
+})
 app.get("/src/users", (req, res)=> {
     res.send(fs.readFileSync("./json/users.json", "utf-8"));
+})
+app.get("/src/active", (req, res)=> {
+    res.send(fs.readFileSync("./json/active.json", "utf-8"));
 })
 app.post("/login", (req, res)=> {
     res.send({"data":req.body.data == authPass})
@@ -52,8 +58,15 @@ app.post("/src/users", (req, res)=> {
         users.push(req.body);
         fs.writeFileSync("./json/users.json", JSON.stringify(users));
         res.send({"status":"Успешно"});
+    }  
+})
+app.post("/src/active", (req, res)=> {
+    if (req.body.pass == authPass) {
+        fs.writeFileSync("./json/active.json", JSON.stringify(req.body.data));
+        res.send({"status":"Успешно"});
+    } else {
+        res.send({"status":"ты чем там занимаешься?! Щас ис клана кикну!"});
     }
-    
 })
 
 
