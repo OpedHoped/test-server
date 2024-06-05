@@ -363,7 +363,7 @@
         const createBlock = (obj, key) => {
             const block = document.createElement("div");
             const h2 = document.createElement("h2");
-            h2.textContent = obj[key];
+            h2.textContent = obj[key]
             block.className = `${key} block-base block`;
             block.dataset.id = document.querySelectorAll(".block").length + 1
             block.append(h2);

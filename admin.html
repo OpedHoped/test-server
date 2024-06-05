@@ -384,7 +384,7 @@
             const headBlock = document.createElement("div");
             headBlock.className = `${key} ${key == "weapons" || key == "armor" ? "block-long" : "block-base"}`;
             const h2 = document.createElement("h2");
-            h2.textContent = text[key].toUpperCase();
+            h2.textContent = text[key] ? text[key].toUpperCase() : key.toUpperCase();
             headBlock.append(h2)
             headerContainer.append(headBlock);
             headerKeys.push(key)
