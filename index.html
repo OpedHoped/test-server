@@ -438,7 +438,7 @@
 </body>
 <script defer>
     //variables
-    var level = localStorage.getItem("cockie") ? 4 : 1;var active = false;var role = "next"; var data, maxLevels;
+    var level = localStorage.getItem("skip") ? 4 : 1;var active = false;var role = "next"; var data, maxLevels;
     const textInputs = {
         elements: [],
         level: []
@@ -696,14 +696,14 @@
                         "namePers":FORM.inputs[0].value,
                         "nameDS":FORM.inputs[1].value,
                         "name":FORM.inputs[2].value,
-                        "hp":FORM.inputs[3].value,
-                        "bulletRes":FORM.inputs[4].value,
-                        "powerRegen":FORM.inputs[5].value,
-                        "speed":FORM.inputs[6].value,
+                        "hp":isNaN(FORM.inputs[3]) ? 0 : FORM.inputs[3].value,
+                        "bulletRes":isNaN(FORM.inputs[4]) ? 0 : FORM.inputs[4].value,
+                        "powerRegen":isNaN(FORM.inputs[4]) ? 0 : FORM.inputs[4].value,
+                        "speed":isNaN(FORM.inputs[5]) ? 0 : FORM.inputs[5].value,
                         "party": "",
                     }
                     level++;
-                    localStorage.setItem("cockie", true)
+                    localStorage.setItem("skip", true);
                     document.querySelector(".footer").classList.add("hidden");
                     fetch('/src/users', {
                         "method":"POST",
@@ -773,7 +773,7 @@
                     elem.closest(".selector").classList.remove("error")
                     elem.closest(".block").children[0].remove()
                 }
-                (index == 0 ? FORM.weapons : FORM.armor).push({name:comboBoxesI[index].placeholder, mod: upgradeInputs[index].value});reload();
+                (index == 0 ? FORM.weapons : FORM.armor).push({name:comboBoxesI[index].placeholder, mod: isNaN(+upgradeInputs[index].value) ? 0 : Math.round(upgradeInputs[index].value)});reload();
                 upgradeInputs[index].value = ""
                 elem.classList.add("disabled")
                 comboBoxesI[index].placeholder = "Выберите из списка"
