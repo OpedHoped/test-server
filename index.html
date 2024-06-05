@@ -690,26 +690,26 @@
                         level++;reload();
                     } 
                 } else {
+                    level++;reload();
                     const user = { //parse FORM
                         "weapons": FORM.weapons,
                         "armor": FORM.armor,
                         "namePers":FORM.inputs[0].value,
                         "nameDS":FORM.inputs[1].value,
                         "name":FORM.inputs[2].value,
-                        "hp":isNaN(FORM.inputs[3]) ? 0 : FORM.inputs[3].value,
-                        "bulletRes":isNaN(FORM.inputs[4]) ? 0 : FORM.inputs[4].value,
-                        "powerRegen":isNaN(FORM.inputs[4]) ? 0 : FORM.inputs[4].value,
-                        "speed":isNaN(FORM.inputs[5]) ? 0 : FORM.inputs[5].value,
+                        "hp": isNaN(+FORM.inputs[3].value) ? 0 : +FORM.inputs[3].value,
+                        "bulletRes": isNaN(+FORM.inputs[4].value) ? 0 : +FORM.inputs[4].value,
+                        "powerRegen": isNaN(+FORM.inputs[5].value) ? 0 : +FORM.inputs[5].value,
+                        "speed": FORM.inputs[6].value,
                         "party": "",
                     }
-                    level++;
                     localStorage.setItem("skip", true);
                     document.querySelector(".footer").classList.add("hidden");
                     fetch('/src/users', {
                         "method":"POST",
                         "body": JSON.stringify(user),
                         "headers": {"Content-type":"Application/json; charset=UTF-8"}
-                    }).then(data=>data.text()).then(data=>console.log(data.status))
+                    }).then(data=>data.text()).then(data=>console.log(data))
                 }
                 
             } else {

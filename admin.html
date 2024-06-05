@@ -328,6 +328,7 @@
             headerContainer.innerHTML = '';
             headerContainer.insertAdjacentHTML("beforeend", `<div class="block-short"></div`)
             if (data) db = data;
+            console.log(db);
             const editSvgListOld = document.querySelectorAll(".edit-svg");const addSvgListOld = document.querySelectorAll(".add-svg");
             db.forEach((obj, index) => {
                 const selector = document.createElement("div");

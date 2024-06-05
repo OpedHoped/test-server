@@ -318,6 +318,7 @@
             listLength = 0
             body.innerHTML = '';
             if (data) db = data;
+            console.log(db);
             const editSvgListOld = document.querySelectorAll(".edit-svg");const addSvgListOld = document.querySelectorAll(".add-svg");
             db.forEach((obj, index) => {
                 const selector = document.createElement("div");
