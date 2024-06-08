@@ -616,12 +616,12 @@
         ],
         "namePers": "ДИМА_ПЭЛГ",
         "nameDS": "dimaskantrobas",
-        "name": "Дима",
+        "name": "Дмитрий",
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "6",
-        "party": "",
+        "party": "M2",
         "звание": "Рядовой"
     },
     {
@@ -675,7 +675,108 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "6.6",
-        "party": "",
+        "party": "D1",
+        "звание": "Рядовой"
+    },
+    {
+        "armor": [
+            {
+                "name": "АЕК-971",
+                "mod": 11
+            },
+            {
+                "name": "HK PSG1",
+                "mod": 5
+            },
+            {
+                "name": "АКМ «Тишина»",
+                "mod": 6
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Поврежденный «Сатурн»",
+                "mod": 8
+            },
+            {
+                "name": "«Призрачный охотник»",
+                "mod": 0
+            },
+            {
+                "name": "Экзоскелет Морга",
+                "mod": 2
+            }
+        ],
+        "namePers": "Масюся",
+        "nameDS": "manny45166",
+        "name": "Максим",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "7.31",
+        "speed": "11",
+        "party": "D1",
+        "звание": "Рядовой"
+    },
+    {
+        "armor": [
+            {
+                "name": "АС Вал",
+                "mod": 11
+            },
+            {
+                "name": "FN SCAR SSR",
+                "mod": 9
+            },
+            {
+                "name": "РПЛ-20",
+                "mod": 5
+            }
+        ],
+        "weapons": [
+            {
+                "name": "SBA TANK",
+                "mod": 6
+            },
+            {
+                "name": "«Альбатрос разведчик»",
+                "mod": 10
+            }
+        ],
+        "namePers": "Zim_L",
+        "nameDS": "zim1345",
+        "name": "Дмитрий",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "6",
+        "party": "M1",
+        "звание": "Рядовой"
+    },
+    {
+        "armor": [
+            {
+                "name": "FN F2000",
+                "mod": 11
+            },
+            {
+                "name": "СВ-98",
+                "mod": 5
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Поврежденный «Центурион»",
+                "mod": 9
+            }
+        ],
+        "namePers": "YanZwer",
+        "nameDS": "yanzwer",
+        "name": "Ян",
+        "hp": "3.98",
+        "bulletRes": "0",
+        "powerRegen": "43.5",
+        "speed": "0",
+        "party": "M2",
         "звание": "Рядовой"
     }
 ]
