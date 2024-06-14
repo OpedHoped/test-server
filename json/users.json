@@ -27,7 +27,7 @@
         "bulletRes": "0",
         "powerRegen": "86",
         "speed": "0",
-        "party": "B1:Лидер",
+        "party": " ",
         "звание": "Лидер"
     },
     {
@@ -56,7 +56,7 @@
         "armor": [
             {
                 "name": "SBA TANK",
-                "mod": "14"
+                "mod": 15
             },
             {
                 "name": "«Призрачный охотник»",
@@ -70,7 +70,7 @@
         "bulletRes": "26",
         "powerRegen": "86",
         "speed": "0",
-        "party": "M1:Лидер",
+        "party": " ",
         "звание": "Лидер"
     },
     {
@@ -101,7 +101,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "6",
-        "party": "M1",
+        "party": " ",
         "звание": "Сержант"
     },
     {
@@ -136,7 +136,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "B1",
+        "party": " ",
         "звание": "Офицер"
     },
     {
@@ -171,7 +171,7 @@
         "bulletRes": "50",
         "powerRegen": "0",
         "speed": "7",
-        "party": "M1",
+        "party": " ",
         "звание": "Сержант"
     },
     {
@@ -206,7 +206,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "Rally",
+        "party": " ",
         "звание": "Сержант"
     },
     {
@@ -229,31 +229,8 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "M2",
+        "party": " ",
         "звание": "Рядовой"
-    },
-    {
-        "armor": [
-            {
-                "name": "А-545",
-                "mod": 11
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Альбатрос-разведчик",
-                "mod": 5
-            }
-        ],
-        "namePers": "Past_Dragoneckij",
-        "nameDS": "past6r",
-        "name": "Геннадий",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0",
-        "party": "Rally:Лидер",
-        "звание": "Офицер"
     },
     {
         "armor": [
@@ -279,7 +256,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "Rally",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -302,7 +279,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "B1",
+        "party": " ",
         "звание": "Офицер"
     },
     {
@@ -325,7 +302,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "D2",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -348,7 +325,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "D2",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -375,7 +352,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "Rally",
+        "party": " ",
         "звание": "Боец"
     },
     {
@@ -398,7 +375,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "D2",
+        "party": " ",
         "звание": "Боец"
     },
     {
@@ -421,7 +398,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "B1",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -444,7 +421,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "D1",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -471,7 +448,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "M1",
+        "party": " ",
         "звание": "Сержант"
     },
     {
@@ -498,7 +475,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "D2",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -525,7 +502,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "M2:Лидер",
+        "party": " ",
         "звание": "Офицер"
     },
     {
@@ -548,7 +525,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "D1",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -571,7 +548,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "Rally",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -598,7 +575,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0",
-        "party": "Rally",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -621,7 +598,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "6",
-        "party": "M2",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -648,7 +625,7 @@
         "bulletRes": "50",
         "powerRegen": "26",
         "speed": "0",
-        "party": "D1",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -675,7 +652,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "6.6",
-        "party": "D1",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -714,7 +691,7 @@
         "bulletRes": "0",
         "powerRegen": "7.31",
         "speed": "11",
-        "party": "D1",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -749,7 +726,7 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "6",
-        "party": "M1",
+        "party": " ",
         "звание": "Рядовой"
     },
     {
@@ -776,7 +753,108 @@
         "bulletRes": "0",
         "powerRegen": "43.5",
         "speed": "0",
-        "party": "M2",
+        "party": " ",
         "звание": "Рядовой"
+    },
+    {
+        "armor": [
+            {
+                "name": "РПЛ-20",
+                "mod": 10
+            },
+            {
+                "name": "FN SCAR SSR",
+                "mod": 8
+            }
+        ],
+        "weapons": [
+            {
+                "name": "SBA TANK",
+                "mod": 10
+            }
+        ],
+        "namePers": "Марк_Холод",
+        "nameDS": "markus_kast",
+        "name": "Макар",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "0",
+        "party": "",
+        "звание": "Рядовой"
+    },
+    {
+        "weapons": [
+            {
+                "name": "РПЛ-20",
+                "mod": 10
+            },
+            {
+                "name": "Понош. L96A1",
+                "mod": 9
+            }
+        ],
+        "armor": [
+            {
+                "name": "SBA TANK",
+                "mod": 10
+            }
+        ],
+        "namePers": "Bez_darb",
+        "nameDS": "tvoy_spasitel",
+        "name": "Bez_darb",
+        "hp": 9,
+        "bulletRes": 0,
+        "powerRegen": 26,
+        "speed": "0",
+        "party": ""
+    },
+    {
+        "weapons": [
+            {
+                "name": "РПЛ-20",
+                "mod": 9
+            },
+            {
+                "name": "FN SCAR SSR",
+                "mod": 12
+            }
+        ],
+        "armor": [
+            {
+                "name": "Поношенный «Мул»",
+                "mod": 10
+            }
+        ],
+        "namePers": "Рене_Токсинов",
+        "nameDS": "__r_e_n_e__",
+        "name": "Рене",
+        "hp": 0,
+        "bulletRes": 61.5,
+        "powerRegen": 0,
+        "speed": "0",
+        "party": ""
+    },
+    {
+        "weapons": [
+            {
+                "name": "АМБ-17",
+                "mod": 10
+            }
+        ],
+        "armor": [
+            {
+                "name": "Экзоброня JD ZIVCAS 2A",
+                "mod": 10
+            }
+        ],
+        "namePers": "TRAXYNCHIK",
+        "nameDS": "tarxynchik",
+        "name": "Алексей",
+        "hp": 309,
+        "bulletRes": 209,
+        "powerRegen": 3,
+        "speed": "10.27",
+        "party": ""
     }
 ]
