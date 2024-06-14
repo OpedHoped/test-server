@@ -76,37 +76,6 @@
     {
         "weapons": [
             {
-                "name": "A-545",
-                "mod": "12"
-            },
-            {
-                "name": "ВСК-94",
-                "mod": 9
-            },
-            {
-                "name": "FN SCAR SSR",
-                "mod": 9
-            }
-        ],
-        "armor": [
-            {
-                "name": "Поношенный «Мул»",
-                "mod": "10"
-            }
-        ],
-        "namePers": "МЕМЯ",
-        "nameDS": "ka_piayst",
-        "name": "Илья",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "6",
-        "party": " ",
-        "звание": "Сержант"
-    },
-    {
-        "weapons": [
-            {
                 "name": "FN F2000",
                 "mod": "11"
             },
@@ -281,52 +250,6 @@
         "speed": "0",
         "party": " ",
         "звание": "Офицер"
-    },
-    {
-        "armor": [
-            {
-                "name": "SIG SG 550 Sniper",
-                "mod": 8
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Экзоскелет морга",
-                "mod": 5
-            }
-        ],
-        "namePers": "Roman_Hoter",
-        "nameDS": "rromma13",
-        "name": "Роман",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
-    },
-    {
-        "armor": [
-            {
-                "name": "M4A1 CQC",
-                "mod": 9
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Поношенный «Легионер»",
-                "mod": 0
-            }
-        ],
-        "namePers": "Генист",
-        "nameDS": "bjuchep",
-        "name": "Денис",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
     },
     {
         "armor": [
@@ -697,41 +620,6 @@
     {
         "armor": [
             {
-                "name": "АС Вал",
-                "mod": 11
-            },
-            {
-                "name": "FN SCAR SSR",
-                "mod": 9
-            },
-            {
-                "name": "РПЛ-20",
-                "mod": 5
-            }
-        ],
-        "weapons": [
-            {
-                "name": "SBA TANK",
-                "mod": 6
-            },
-            {
-                "name": "«Альбатрос разведчик»",
-                "mod": 10
-            }
-        ],
-        "namePers": "Zim_L",
-        "nameDS": "zim1345",
-        "name": "Дмитрий",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "6",
-        "party": " ",
-        "звание": "Рядовой"
-    },
-    {
-        "armor": [
-            {
                 "name": "FN F2000",
                 "mod": 11
             },
@@ -840,6 +728,10 @@
             {
                 "name": "АМБ-17",
                 "mod": 10
+            },
+            {
+                "name": "QBZ-191 «Буревестник»",
+                "mod": 12
             }
         ],
         "armor": [
@@ -856,5 +748,50 @@
         "powerRegen": 3,
         "speed": "10.27",
         "party": ""
+    },
+    {
+        "weapons": [
+            {
+                "name": "АКМ «Тишина»",
+                "mod": 10
+            }
+        ],
+        "armor": [
+            {
+                "name": "УКАЗАО-4 «Рейдер»",
+                "mod": 6
+            }
+        ],
+        "namePers": "VNovaSiV",
+        "nameDS": "starhina",
+        "name": "Илья",
+        "hp": 0,
+        "bulletRes": 0,
+        "powerRegen": 0,
+        "speed": "9",
+        "party": ""
+    },
+    {
+        "armor": [
+            {
+                "name": "тишина",
+                "mod": 11
+            }
+        ],
+        "weapons": [
+            {
+                "name": "ziv",
+                "mod": 9
+            }
+        ],
+        "namePers": "Teneyob",
+        "nameDS": "xuiznaet1",
+        "name": "хз",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "0",
+        "party": "",
+        "звание": ""
     }
 ]
