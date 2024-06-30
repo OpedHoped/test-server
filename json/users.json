@@ -276,69 +276,6 @@
     {
         "armor": [
             {
-                "name": "HK XM8",
-                "mod": 10
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Экзоскелет Искателя",
-                "mod": 5
-            }
-        ],
-        "namePers": "Бебрик_тильт",
-        "nameDS": ".art15",
-        "name": "Артём",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0"
-    },
-    {
-        "armor": [
-            {
-                "name": "Поношенный ПКП",
-                "mod": 8
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Экзокостюм «Крысолов»",
-                "mod": 5
-            }
-        ],
-        "namePers": "ДифМакс",
-        "nameDS": "dif9100",
-        "name": "Максим",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0"
-    },
-    {
-        "armor": [
-            {
-                "name": "HK XM8",
-                "mod": 6
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Экзоскелет «Абориген»",
-                "mod": 8
-            }
-        ],
-        "namePers": "ДИМА_ПЭЛГ",
-        "nameDS": "dimaskantrobas",
-        "name": "Дмитрий",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "6"
-    },
-    {
-        "armor": [
-            {
                 "name": "РПД",
                 "mod": 12
             },
@@ -752,6 +689,60 @@
         "namePers": "Signi_",
         "nameDS": "j0hn_shelby",
         "name": "Назар",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "0"
+    },
+    {
+        "armor": [
+            {
+                "name": "АС «Вал»",
+                "mod": 5
+            },
+            {
+                "name": "FN F2000",
+                "mod": 11
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Поврежденный «Сатурн»",
+                "mod": 7
+            },
+            {
+                "name": "Экзоскелет «Абориген»",
+                "mod": 9
+            }
+        ],
+        "namePers": "Your_Drige",
+        "nameDS": "scyllatyrannos",
+        "name": "Дмитрий",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "5.95"
+    },
+    {
+        "armor": [
+            {
+                "name": "АК-308",
+                "mod": 10
+            },
+            {
+                "name": "А-545",
+                "mod": 13
+            }
+        ],
+        "weapons": [
+            {
+                "name": "«Альбатрос-Разведчик»",
+                "mod": 10
+            }
+        ],
+        "namePers": "Past_Dragoneckij",
+        "nameDS": "past6r",
+        "name": "Геннадий",
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
