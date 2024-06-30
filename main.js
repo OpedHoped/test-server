@@ -1,7 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const fs = require("fs")
+const {exec} = require("child_process");
+const fs = require("fs");
 const PORT = 5549
 
 const authPass = "__9zkeuLAK" //пароль для входа
@@ -48,6 +49,10 @@ app.post("/login", (req, res)=> {
 app.post("/src/users", (req, res)=> {
     if (req.query.save) {
         if (req.body.pass == authPass) {
+            exec("node ./save.js", (err, stdout, stderr)=> {
+                console.error(stderr);
+                console.log(stdout);
+            })
             fs.writeFileSync("./json/users.json", JSON.stringify(req.body.data));
             res.send({"status":"Успешно"});
         } else {
