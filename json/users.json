@@ -26,9 +26,7 @@
         "hp": "10",
         "bulletRes": "0",
         "powerRegen": "86",
-        "speed": "0",
-        "party": " ",
-        "звание": "Лидер"
+        "speed": "0"
     },
     {
         "weapons": [
@@ -69,9 +67,7 @@
         "hp": "6.6",
         "bulletRes": "26",
         "powerRegen": "86",
-        "speed": "0",
-        "party": " ",
-        "звание": "Лидер"
+        "speed": "0"
     },
     {
         "weapons": [
@@ -104,44 +100,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Офицер"
-    },
-    {
-        "weapons": [
-            {
-                "name": "ПКП «Печенег»",
-                "mod": "12"
-            },
-            {
-                "name": "FN SCAR SSR",
-                "mod": "12"
-            },
-            {
-                "name": "РПЛ-20",
-                "mod": "10"
-            },
-            {
-                "name": "Понош. L96A1",
-                "mod": "11"
-            }
-        ],
-        "armor": [
-            {
-                "name": "Бронекостюм «СКАТ-9м»",
-                "mod": "12"
-            }
-        ],
-        "namePers": "Сержио",
-        "nameDS": "sergo_kot",
-        "name": "Сергей",
-        "hp": "0",
-        "bulletRes": "50",
-        "powerRegen": "0",
-        "speed": "7",
-        "party": " ",
-        "звание": "Сержант"
+        "speed": "0"
     },
     {
         "weapons": [
@@ -174,9 +133,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Сержант"
+        "speed": "0"
     },
     {
         "weapons": [
@@ -197,109 +154,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
-    },
-    {
-        "armor": [
-            {
-                "name": "РПЛ-20",
-                "mod": 9
-            },
-            {
-                "name": "FN SCAR SSR",
-                "mod": 10
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Альбатрос-разведчик",
-                "mod": 6
-            }
-        ],
-        "namePers": "WENOM_HARD",
-        "nameDS": "tarick6813",
-        "name": "Кирилл",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
-    },
-    {
-        "armor": [
-            {
-                "name": "FN F2000",
-                "mod": 10
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Экзоброня JD ZIVCAS 2A",
-                "mod": 12
-            }
-        ],
-        "namePers": "ПипкаПоп",
-        "nameDS": "razak48",
-        "name": "Дмитрий",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Офицер"
-    },
-    {
-        "armor": [
-            {
-                "name": "FN SCAR SSR",
-                "mod": 9
-            },
-            {
-                "name": "НГ FAMAS G2",
-                "mod": 10
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Поношенный «Сатурн»",
-                "mod": 11
-            }
-        ],
-        "namePers": "razep",
-        "nameDS": "razep",
-        "name": "Жас Улан",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Боец"
-    },
-    {
-        "armor": [
-            {
-                "name": "ТКБ-0146М",
-                "mod": 5
-            }
-        ],
-        "weapons": [
-            {
-                "name": "АО-4 «Рейдер»",
-                "mod": 5
-            }
-        ],
-        "namePers": "Sppppitya",
-        "nameDS": "istic.bro",
-        "name": "Матвей",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Боец"
+        "speed": "0"
     },
     {
         "armor": [
@@ -320,9 +175,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -343,9 +196,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -370,9 +221,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Сержант"
+        "speed": "0"
     },
     {
         "armor": [
@@ -397,9 +246,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -424,9 +271,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Офицер"
+        "speed": "0"
     },
     {
         "armor": [
@@ -447,9 +292,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -470,9 +313,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -497,9 +338,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -520,9 +359,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "6",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "6"
     },
     {
         "armor": [
@@ -547,75 +384,7 @@
         "hp": "1.6",
         "bulletRes": "50",
         "powerRegen": "26",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
-    },
-    {
-        "armor": [
-            {
-                "name": "СВ-98",
-                "mod": 6
-            },
-            {
-                "name": "АС «Вал»",
-                "mod": 10
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Бронекостюм «Легионер»",
-                "mod": 8
-            }
-        ],
-        "namePers": "KSKscorpion",
-        "nameDS": "scorpion1007",
-        "name": "Руслан",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "6.6",
-        "party": " ",
-        "звание": "Рядовой"
-    },
-    {
-        "armor": [
-            {
-                "name": "АЕК-971",
-                "mod": 11
-            },
-            {
-                "name": "HK PSG1",
-                "mod": 5
-            },
-            {
-                "name": "АКМ «Тишина»",
-                "mod": 6
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Поврежденный «Сатурн»",
-                "mod": 8
-            },
-            {
-                "name": "«Призрачный охотник»",
-                "mod": 0
-            },
-            {
-                "name": "Экзоскелет Морга",
-                "mod": 2
-            }
-        ],
-        "namePers": "Масюся",
-        "nameDS": "manny45166",
-        "name": "Максим",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "7.31",
-        "speed": "11",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -640,9 +409,7 @@
         "hp": "3.98",
         "bulletRes": "0",
         "powerRegen": "43.5",
-        "speed": "0",
-        "party": " ",
-        "звание": "Рядовой"
+        "speed": "0"
     },
     {
         "armor": [
@@ -667,35 +434,7 @@
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": "",
-        "звание": "Рядовой"
-    },
-    {
-        "weapons": [
-            {
-                "name": "РПЛ-20",
-                "mod": 10
-            },
-            {
-                "name": "Понош. L96A1",
-                "mod": 9
-            }
-        ],
-        "armor": [
-            {
-                "name": "SBA TANK",
-                "mod": 10
-            }
-        ],
-        "namePers": "Bez_darb",
-        "nameDS": "tvoy_spasitel",
-        "name": "Bez_darb",
-        "hp": 9,
-        "bulletRes": 0,
-        "powerRegen": 26,
-        "speed": "0",
-        "party": ""
+        "speed": "0"
     },
     {
         "weapons": [
@@ -720,8 +459,7 @@
         "hp": 0,
         "bulletRes": 61.5,
         "powerRegen": 0,
-        "speed": "0",
-        "party": ""
+        "speed": "0"
     },
     {
         "weapons": [
@@ -746,30 +484,7 @@
         "hp": 309,
         "bulletRes": 209,
         "powerRegen": 3,
-        "speed": "10.27",
-        "party": ""
-    },
-    {
-        "weapons": [
-            {
-                "name": "АКМ «Тишина»",
-                "mod": 10
-            }
-        ],
-        "armor": [
-            {
-                "name": "УКАЗАО-4 «Рейдер»",
-                "mod": 6
-            }
-        ],
-        "namePers": "VNovaSiV",
-        "nameDS": "starhina",
-        "name": "Илья",
-        "hp": 0,
-        "bulletRes": 0,
-        "powerRegen": 0,
-        "speed": "9",
-        "party": ""
+        "speed": "10.27"
     },
     {
         "armor": [
@@ -786,12 +501,264 @@
         ],
         "namePers": "Teneyob",
         "nameDS": "xuiznaet1",
-        "name": "хз",
+        "name": "Артем",
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
-        "speed": "0",
-        "party": "",
-        "звание": ""
+        "speed": "0"
+    },
+    {
+        "weapons": [
+            {
+                "name": "SA-58 CTC",
+                "mod": 14
+            },
+            {
+                "name": "ВСС-М «Винторез»",
+                "mod": 10
+            }
+        ],
+        "armor": [
+            {
+                "name": "SBA TANK",
+                "mod": 11
+            },
+            {
+                "name": "«Альбатрос-Лазутчик»",
+                "mod": 10
+            }
+        ],
+        "namePers": "Azumir",
+        "nameDS": ".azumir.",
+        "name": "Кирилл",
+        "hp": 0,
+        "bulletRes": 8.13,
+        "powerRegen": 0.76,
+        "speed": "0.76"
+    },
+    {
+        "armor": [
+            {
+                "name": "SA-58 CTC",
+                "mod": 11
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Бронекостюм «СКАТ-9б»",
+                "mod": 10
+            }
+        ],
+        "namePers": "Леха_Эхослемоыич",
+        "nameDS": "xronoxryak",
+        "name": "Егор",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "16.95"
+    },
+    {
+        "armor": [
+            {
+                "name": "SIG SG 550",
+                "mod": 10
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Бронекостюм «СКАТ-9б»",
+                "mod": 10
+            }
+        ],
+        "namePers": "Забивной_помидор",
+        "nameDS": "_craizex_",
+        "name": "Александр",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "1.41"
+    },
+    {
+        "armor": [
+            {
+                "name": "FN2000 Tactical",
+                "mod": 11
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Экзоброня JD ZIVCAS 2A",
+                "mod": 11
+            }
+        ],
+        "namePers": "SevkaS",
+        "nameDS": "skyl1nes",
+        "name": "Сева",
+        "hp": "14.11",
+        "bulletRes": "0",
+        "powerRegen": "83.89",
+        "speed": "2.27"
+    },
+    {
+        "armor": [
+            {
+                "name": "А-545",
+                "mod": 11
+            },
+            {
+                "name": "FN SCAR SSR",
+                "mod": 12
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Экзоскелет «Абориген»",
+                "mod": 6
+            }
+        ],
+        "namePers": "АУЦПМ",
+        "nameDS": "deprog_6781",
+        "name": "Петр",
+        "hp": "0",
+        "bulletRes": "52",
+        "powerRegen": "0",
+        "speed": "0"
+    },
+    {
+        "armor": [
+            {
+                "name": "ВСК-94",
+                "mod": 9
+            },
+            {
+                "name": "А-545",
+                "mod": 9
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Экзоскелет «Абориген»",
+                "mod": 10
+            },
+            {
+                "name": "Поврежденный «Сатурн»",
+                "mod": 9
+            }
+        ],
+        "namePers": "Бескультурный",
+        "nameDS": "iamcultural",
+        "name": "Никита",
+        "hp": "4.2",
+        "bulletRes": "0",
+        "powerRegen": "46.97",
+        "speed": "0"
+    },
+    {
+        "armor": [
+            {
+                "name": "АМБ-17",
+                "mod": 10
+            },
+            {
+                "name": "FN SCAR SSR",
+                "mod": 10
+            },
+            {
+                "name": "РПЛ-20",
+                "mod": 8
+            },
+            {
+                "name": "FAMAS G2",
+                "mod": 13
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Бронекостюм «Авангард»",
+                "mod": 12
+            },
+            {
+                "name": "SBA TANK",
+                "mod": 0
+            }
+        ],
+        "namePers": "Sovor",
+        "nameDS": "s0v0r",
+        "name": "Евгений",
+        "hp": "0",
+        "bulletRes": "8.7",
+        "powerRegen": "0",
+        "speed": "10.36"
+    },
+    {
+        "armor": [
+            {
+                "name": "FN F2000 Tactical",
+                "mod": 12
+            }
+        ],
+        "weapons": [
+            {
+                "name": "SBA TANK",
+                "mod": 11
+            }
+        ],
+        "namePers": "FLEDAF",
+        "nameDS": "fled1256",
+        "name": "Федор",
+        "hp": "9.5",
+        "bulletRes": "0",
+        "powerRegen": "40",
+        "speed": "4"
+    },
+    {
+        "armor": [
+            {
+                "name": "ВСК-94",
+                "mod": 10
+            },
+            {
+                "name": "АК-15",
+                "mod": 11
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Поношенный АО-6",
+                "mod": 11
+            },
+            {
+                "name": "Поношенный «Центурион»",
+                "mod": 10
+            }
+        ],
+        "namePers": "LIOmon",
+        "nameDS": "fkgild",
+        "name": "Роман",
+        "hp": "2.06",
+        "bulletRes": "26.47",
+        "powerRegen": "38.51",
+        "speed": "0"
+    },
+    {
+        "armor": [
+            {
+                "name": "SA-58 CTC",
+                "mod": 11
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Поношенный «Сатурн»",
+                "mod": 11
+            }
+        ],
+        "namePers": "Dolbim_Kripov",
+        "nameDS": "be7okk",
+        "name": "Антон",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "0"
     }
 ]
