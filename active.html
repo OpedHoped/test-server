@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="data:image/x-icon">
+    <title>Пользователи</title>
+    <style>
+        /* main */
+        :root {
+            --grey: #DDDDDD;
+            --scrollbar-bg: #bfbfbf;
+            --dark-grey: #494949;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* elements */
+        .add-list-btn, .remove-list-btn {
+            min-width: 30px;
+        }
+        .load-overlay {
+            min-width: 15000px; /* debug */
+            min-height: 10000px;
+            user-select: none;
+            position: fixed;
+            z-index: 5;
+            background-color: black;
+            transition: 300ms opacity;
+        }.load-overlay svg {
+            position: fixed;
+            left: calc(50vw - 50px);
+            top: calc(50vh - 50px);
+            z-index: 6;
+            animation: 1s linear infinite;
+            animation-name: a;
+            transition: 300ms opacity;
+        }
+        @keyframes a {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .styled-btn {
+            user-select: none;
+            height: 30px;
+            color:black;
+            border: solid 1px var(--grey);
+            box-shadow: 1px 1px 3px 0 black;
+            cursor: pointer;
+            transition: 200ms;
+        }.styled-btn:hover {text-shadow: 1px 1px 2px black}
+
+        .item-list {
+            z-index: 1;
+            background-color: white;
+            border: solid 1px var(--grey);
+        }
+        .item-list-container {
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            min-width: 338px;
+            width: 338px;
+            align-items: center;
+            padding-left: 10px;
+        }
+        .item-list li {
+            height: 20px;
+            text-align: center;
+        }
+
+        .list {
+            user-select: none;
+            display: flex;
+            height: 30px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        .list-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 50px;
+        }
+
+        .combobox {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            height: auto;
+            display: grid;
+        }
+
+        .arrow {
+            user-select: none;
+            width: 10px;
+            cursor: pointer;
+            height: 10px;
+            margin-bottom: 4px;
+            border-top: 2px solid var(--grey);
+            border-right: 2px solid var(--grey);
+        }.arrow:hover {border-top: 2px solid var(--dark-grey);border-right: 2px solid var(--dark-grey);
+        }.arrow[data-rotation="down"] {transform: rotate(135deg);
+        }.arrow[data-rotation="up"] {margin-top: 10px;transform: rotate(-45deg);
+        }.arrow[data-rotation="down"]:hover {transform: rotate(135deg)}
+        .arrow[data-rotation="up"]:hover {
+            margin-top: 10px;
+            border-top: 2px solid var(--dark-grey);
+            border-right: 2px solid var(--dark-grey);
+            transform: rotate(-45deg);
+        }
+
+        .body, .header, .header-title, .modal-header {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .block-base h2, .block-long h2 {
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 800;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .overlay {
+            min-width: 15000px; /* debug */
+            min-height: 10000px;
+            user-select: none;
+            position: fixed;
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.671);
+            backdrop-filter: blur(7px);
+        }
+
+        .auth-modal {
+            user-select: none;
+            display: flex;
+            min-width: 450px;
+            flex-direction: column;
+            justify-content: space-between;
+            top: 35vh;
+            width: 30vw;
+            left: 35vw;
+            position: fixed;
+            height: 30vh;
+            background-color: white;
+            z-index: 3;
+            padding: 20px;
+            min-height: 200px;
+            border: 2px solid var(--grey);
+            box-shadow: 0 0 3px 1px var(--grey);
+        }
+
+        .styled-input {
+            user-select: none;
+            appearance: none;
+            border:none;
+            border-bottom: solid 1px var(--grey);
+            outline: none;
+            padding-bottom: 10px;
+            height: 20px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: 200ms border-bottom;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }.styled-input:focus {
+            border-bottom: solid 1px red;
+        }
+
+        .footer button {margin: 0 10px}
+        .edit-svg {cursor: pointer}.edit-svg:hover {fill:black}
+        .add-svg {cursor: pointer}.add-svg:hover {filter:brightness(0.4)}
+        .header h2 {font-weight: 800}
+
+        /* blocks */
+        .header-container div  {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .selector > .block-base:not(ul)  {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .block-short {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .selector, .header-container, .footer {display: flex}
+
+        .footer {
+            align-items: center;
+            padding: 10px;
+        }
+
+        .block-base, .block-short, .block-long {border: solid 1px var(--grey);height: 30px;}
+        .block-base {min-width: 250px; padding-left: 10px;}.block-short {min-width: 50px}.block-long{min-width: 350px;}
+        /* custom */
+        .styled-scrollbars::-webkit-scrollbar {
+            appearance: none;
+            width: 10px;
+            height: 10px;
+        }.styled-scrollbars::-webkit-scrollbar-track {background-color: var(--scrollbar-bg);}
+        .styled-scrollbars::-webkit-scrollbar-thumb {background-color: var(--dark-grey);}
+
+        .hidden {display: none;}
+
+        .item-list-box {
+            min-width: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .remove-btn {
+            width: 7px;
+            height: 7px;
+            cursor:pointer;
+        }
+        .remove-btn::before {
+            cursor:pointer;
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: black;
+            transform: rotate(45deg);
+        }
+        .remove-btn::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: black;
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body class="styled-scrollbars">
+    <div class="load-overlay">
+        <svg fill="#FFF"width="50px" height="50px" viewBox="0 0 374.846 374.846"><g><g><g><path d="M326.147,267.326c4.168-6.754,12.875-9.094,19.869-5.336l5.83,3.135c3.635,1.955,6.305,5.32,7.379,9.305c1.076,3.984,0.461,8.236-1.695,11.754c-8.301,13.519-18.295,25.941-29.709,36.923c-2.805,2.692-6.531,4.188-10.397,4.188c-0.242,0-0.482-0.006-0.726-0.018c-4.123-0.199-7.981-2.09-10.668-5.227l-4.309-5.025c-5.164-6.025-4.74-15.031,0.967-20.547C311.678,287.793,319.573,277.984,326.147,267.326z"/><path d="M208.809,338.262c12.505-0.903,24.873-3.344,36.77-7.252c7.529-2.475,15.685,1.334,18.617,8.695l2.451,6.153c1.529,3.839,1.408,8.138-0.334,11.884c-1.74,3.746-4.953,6.604-8.873,7.907c-8.094,2.687-16.451,4.843-24.848,6.407c-7.112,1.328-14.377,2.254-21.592,2.754c-0.349,0.023-0.693,0.035-1.037,0.035c-3.759,0-7.396-1.412-10.175-3.979c-3.034-2.802-4.78-6.73-4.823-10.859l-0.071-6.625C194.809,345.459,200.906,338.834,208.809,338.262z"/><path d="M89.693,312.596c5.039-6.135,13.984-7.276,20.404-2.612c10.135,7.36,21.16,13.435,32.773,18.053c7.373,2.933,11.188,11.101,8.701,18.636l-2.072,6.287c-1.293,3.92-4.145,7.135-7.883,8.887c-2.012,0.941-4.186,1.416-6.361,1.416c-1.867,0-3.738-0.35-5.512-1.049c-14.73-5.818-28.695-13.51-41.508-22.863c-3.332-2.434-5.516-6.133-6.037-10.227c-0.52-4.097,0.672-8.224,3.291-11.41L89.693,312.596z"/><path d="M28.699,214.609l6.508-1.216c7.82-1.454,15.414,3.438,17.314,11.156c3.029,12.289,7.592,24.129,13.561,35.191c3.766,6.979,1.449,15.686-5.289,19.867l-5.625,3.491c-2.398,1.487-5.141,2.257-7.912,2.257c-1.285,0-2.576-0.164-3.842-0.5c-3.992-1.061-7.371-3.716-9.342-7.348c-7.602-14.012-13.387-29.016-17.193-44.598c-0.979-4.005-0.266-8.234,1.971-11.697C21.087,217.753,24.648,215.365,28.699,214.609z"/><path d="M36.849,170.858h-6.727c-0.006,0-0.014,0-0.02,0c-8.287,0-15-6.715-15-15c0-1.219,0.143-2.404,0.418-3.539c5.584-29.84,18.643-58.24,37.801-82.188C82.325,33.873,123.52,9.826,169.319,2.416C179.227,0.814,189.325,0,199.333,0c25.752,0,51.313,5.385,74.813,15.67l11.687-11.688c2.413-2.412,5.909-3.389,9.225-2.574c3.313,0.812,5.961,3.299,6.981,6.555l24.191,77.16c1.086,3.465,0.158,7.248-2.41,9.816c-2.567,2.568-6.35,3.496-9.815,2.41l-77.16-24.191c-3.256-1.02-5.739-3.668-6.556-6.982c-0.813-3.312,0.162-6.811,2.576-9.223l13.013-13.014c-15.021-4.963-30.656-7.473-46.685-7.473c-45.797,0-88.547,20.604-117.287,56.531c-15.309,19.135-25.793,41.84-30.322,65.662C50.24,165.737,44.052,170.858,36.849,170.858z"/></g></g></g></svg>
+    </div>
+    <div class="overlay"></div>
+    <div class="header">
+        <h2 class="header-title">Активность клана</h2>
+        <div class="header-container">
+            <!-- fillHeader() js -->
+        </div>
+    </div>
+    <div class="body">
+        <!-- generate() js -->
+    </div>
+    <div class="footer">
+        <button class="add-btn styled-btn hidden" onclick="addBlock()">Добавить</button>
+        <button class="save-btn styled-btn hidden" onclick="save()">Сохранить</button>
+        <button class="delete-btn styled-btn hidden" onclick="deleteSelector()">Удалить</button>
+    </div>
+    <div class="auth-modal">
+        <div class="modal-header">
+            <h2 class="modal-title">Стоп!</h2>
+            <p class="modal-text">Для редактирования списка участников, вам нужны права главы клана.</p>
+            <input class="input-pass styled-input" type="text" placeholder="Введите пароль">
+        </div>
+        <div class="modal-footer">
+            <button class="auth-btn styled-btn" onclick="checkAuth()">Войти</button>
+            <button class="skip-btn styled-btn" onclick="skip()">Продолжить в режиме чтения</button>
+        </div>
+    </div>
+
+    <script defer>
+        //variables
+        const svgPath = `"M20.1498 7.93997L8.27978 19.81C7.21978 20.88 4.04977 21.3699 3.32977 20.6599C2.60977 19.9499 3.11978 16.78 4.17978 15.71L16.0498 3.84C16.5979 3.31801 17.3283 3.03097 18.0851 3.04019C18.842 3.04942 19.5652 3.35418 20.1004 3.88938C20.6356 4.42457 20.9403 5.14781 20.9496 5.90463C20.9588 6.66146 20.6718 7.39189 20.1498 7.93997V7.93997Z" stroke="#000000" stroke-width="1.5"`
+        const body = document.querySelector(".body");
+        const blocks = document.querySelectorAll(".block-normal");
+        const headerContainer = document.querySelector(".header-container");
+        const addBtn = document.querySelector(".add-btn");
+        const saveBtn = document.querySelector(".save-btn");
+        const deleteBtn = document.querySelector(".delete-btn");
+        const modal = document.querySelector(".auth-modal");
+        const overlay = document.querySelector(".overlay");
+        const inputPass = document.querySelector(".input-pass");
+        const loadOverlay = document.querySelector(".load-overlay");
+        var db;var selected = false;var listLength = 0;
+        var authed = false
+        const objects = {
+            lists: [],
+            blocks: [],
+            selectors: []
+        }
+        const headerKeys = []
+        var lists = []
+        //functions
+        
+        const generate = (data) => {
+            headerContainer.innerHTML = '';
+            headerContainer.insertAdjacentHTML("beforeend", `<div class="block-short"></div`)
+            listLength = 0
+            body.innerHTML = '';
+            if (data) db = data;
+            console.log(db);
+            const editSvgListOld = document.querySelectorAll(".edit-svg");const addSvgListOld = document.querySelectorAll(".add-svg");
+            db.forEach((obj, index) => {
+                const selector = document.createElement("div");
+                selector.className = "selector";
+                selector.dataset.id = index + 1;
+                selector.insertAdjacentHTML("beforeend", `<div class="block-short number-list">${selector.dataset.id}</div`)
+
+                for (const key in obj) {
+                    if (key  != "kv") {
+                        selector.append(createBlock(obj, key));
+                        if (index == 0) fillHeader(key, "short");
+                    } else {
+                        obj.kv.forEach(kv => {
+                            selector.append(createList(kv));
+                            if (index == 0) fillHeader(kv.date, "long");
+                        })
+                    }
+                }
+                body.append(selector);
+
+                if (selected) {
+                    lists.forEach(elem => {
+                        if (elem.dataset.id == selected.slice(1) && elem.closest(".selector").dataset.id == selected.slice(0, 1)) {
+                            elem.children[1].classList.remove("hidden")
+                            elem.querySelector(".arrow").dataset.rotation = "up"
+                        }
+                    })
+                }
+
+            })
+            const editSvgList = document.querySelectorAll(".edit-svg");const addSvgList = document.querySelectorAll(".add-svg");
+            [editSvgList, addSvgList].forEach(list => {
+                    list.forEach(svg => {
+                    if (!Array.from(list == editSvgList ? editSvgListOld : addSvgListOld).includes(svg)) {
+                        svg.onclick = (e) => {list == editSvgList ? edit(e.target) : add(e.target)};
+                    }
+                })
+            })
+            headerContainer.insertAdjacentHTML("beforeend", `<button class="remove-list-btn styled-btn ${authed ? "" : "hidden"}" onclick="removeList()">-</button`);
+            headerContainer.insertAdjacentHTML("beforeend", `<button class="add-list-btn styled-btn ${authed ? "" : "hidden"}" onclick="addList()">+</button`);
+            lists = []
+        }
+        const createBlock = (obj, key) => {
+            const block = document.createElement("div");
+            const h2 = document.createElement("h2");
+            h2.textContent = obj[key]
+            block.className = `${key} block-base block`;
+            block.dataset.id = document.querySelectorAll(".block").length + 1
+            block.append(h2);
+            block.insertAdjacentHTML("beforeend", `<svg class="edit-svg ${authed ? "" : "hidden"}" width="30px" height="26px" fill="none"><path d = ${svgPath}></path></svg>`);
+            listLength++;
+            return block
+        }
+        const fillHeader = (key, type) => {
+            const headBlock = document.createElement("div");
+            headBlock.className = `${key} ${type == "long" ? "block-long" : "block-base"}`;
+            const h2 = document.createElement("h2");
+            h2.textContent = key
+            headBlock.append(h2)
+            headerContainer.append(headBlock);
+        }
+        
+        const createList = (obj) => {
+            const combobox = document.createElement("ul")
+            combobox.className = `combobox block-long block`
+
+            const list = document.createElement("div")
+            list.classList = "list"
+
+            const listContainer = document.createElement("div");
+            listContainer.className = "list-container";
+
+            const arrow = document.createElement("div")
+            arrow.className = "arrow"
+            arrow.dataset.rotation = "down";
+            arrow.onclick = (e) => toggle(arrow, arrow.closest(".list"), e)
+
+            const itemList = document.createElement("div")
+            itemList.className = "item-list hidden";
+
+            list.insertAdjacentHTML("beforeend", `<div>РЕЗУЛЬТАТЫ</div>`);
+            listContainer.insertAdjacentHTML("beforeend", `<svg class="add-svg ${authed ? "" : "hidden"}" width="30px" height="30px" viewBox="0 0 24 24" fill="none"><g><path id="Vector" d="M8 12H12M12 12H16M12 12V16M12 12V8M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#DDDDDD" stroke-width="2" stroke-linecap="round"/></g></svg>`);
+            listContainer.append(arrow)
+
+            list.append(listContainer)
+
+            const liList = []
+            let index = 0;
+            for (const name in obj) {
+                if (name != "date") {
+                const itemListContainer = document.createElement("div");
+                itemListContainer.className = "item-list-container";
+                const li = document.createElement("li")
+                const removeBtn = document.createElement("div")
+                const itemListBox = document.createElement("div")
+                itemListBox.className = 'item-list-box';
+                removeBtn.className = `remove-btn ${authed == false ? "hidden" : ""}`;
+                removeBtn.dataset.name = name
+                removeBtn.onclick = (e) => {remove(e.target)}
+                li.className = name;
+                li.textContent = `${name}:${obj[name]}`
+                li.dataset.id = index;
+                liList.push(li)
+                itemListBox.append(removeBtn)
+                itemListBox.insertAdjacentHTML("beforeend", `<svg class="edit-svg ${authed ? "" : "hidden"}" width="30px" height="26px" fill="none"><path d = ${svgPath}></path></svg>`)
+                itemListContainer.append(li)
+                itemListContainer.append(itemListBox);
+                itemList.append(itemListContainer);
+                };index++;
+            }
+            combobox.append(list);
+            combobox.append(itemList);
+
+            lists.push(combobox)
+            combobox.dataset.id = lists.length + listLength
+
+            return combobox;
+        }
+        const toggle = (arrow, e) => {
+            document.querySelectorAll(".arrow").forEach(elem => {if (elem != arrow) {elem.dataset.rotation = "down"}})
+            document.querySelectorAll(".item-list").forEach(elem => elem.classList.add("hidden"))
+            const classList = arrow.closest(".combobox").children[1].classList
+            if (arrow.dataset.rotation == "down") {
+                selected = arrow.closest(".selector").dataset.id + arrow.closest(".block").dataset.id
+                classList.remove("hidden")
+            } else {
+                selected = false
+                classList.add("hidden")
+            }
+            arrow.dataset.rotation = arrow.dataset.rotation == "down" ? "up" : "down";
+        }
+
+        const edit = (target) => {
+            
+            const parent = target.closest(".block");
+            const id = +parent.closest(".selector").dataset.id-1; //ряд
+            const name = parent.classList[0];
+
+            if (parent.classList[0] != "combobox") {
+                const replace = prompt(`Заменить ${name} ${id+1} ряда`);
+                if (replace) {
+                    db[id][name] = replace;
+                    generate()
+                }
+            } else {
+                const select = target.closest(".item-list-container").children[0]
+                const blockN = +parent.dataset.id-2-((parent.closest(".selector").children.length-1)*(id))
+                const replace = prompt(`Заменить значение "${select.className}" списка ${+parent.dataset.id-1-3*(id)} ряда ${parent.closest(".selector").dataset.id}`);
+                if (replace) {
+                    db[id].kv[blockN][select.className] = replace.toString().length <= 25 ? !isNaN(+replace) ? +replace : replace : !isNaN(+replace) ? +(replace.toString().slice(0, 25)) : replace.toString().slice(0, 25) + ".."
+                    generate()
+                }
+            }
+        }
+
+        const addBlock = () => {
+            const emptyDb = {};
+            for (name in db[0]) {
+                Object.defineProperty(emptyDb, name, {value: "", enumerable: true, writable: true, configurable: true})   
+            }
+            emptyDb.kv = [];
+            for (let i = 0; i < db[0].kv.length; i++) emptyDb.kv.push({});
+            db.push(emptyDb)
+            console.log(db);
+            generate()
+        }
+        const addList = () => {
+            const type = confirm("Добавление ряда\nОК - сделать список\nОтмена - сделать блок");
+            if (type) {
+                db.forEach(data=> {
+                    if (data.kv.length > 0) {
+                        const date = new Date(data.kv[data.kv.length-1].date)
+                    const parseData = new Date(date.getTime()+86400000).toLocaleString([], {year:"numeric", month: '2-digit', day:'2-digit'}).split(".")
+                    data.kv.push({date: `${parseData[1]}-${parseData[0]}-${parseData[2]}`})
+                    } else {
+                        console.log(data.kv);
+                        data.kv.push({date:"06-01-2024"})
+                    }
+
+                    generate()
+                })
+            } else {
+                const name = prompt("Введите название");
+                db.forEach(data=> {
+                    Object.defineProperty(data, name, {value:"", enumerable: true, configurable: true, writable: true});
+                    generate()
+                })
+            }
+        }
+        const removeList = () => {
+            const keys = []
+            for (let key in db[0]) {
+                if (db[0][key].length != 0) {
+                    keys.push(key);
+                } else {
+                    if (db[0][key] == "") {
+                        keys.push(key)
+                    }
+                }
+            }
+            const key = keys[keys.length-1]
+            if (key != "user") {
+                if (key != "kv") {
+                    db.forEach(obj => {
+                        delete obj[key]
+                    })
+                } else {
+                    db.forEach(obj => {
+                        obj.kv.splice(obj.kv.length-1, 1);
+                    })
+                }
+            }
+            generate()
+        }
+
+        const add = (target) => {
+            const parent = target.closest(".block")
+            const id = target.closest(".selector").dataset.id-1
+            var name = prompt(`Добавить значение в список ${+parent.dataset.id-1-3*(id)} ${id+1} ряда`);
+            const blockN = +parent.dataset.id-2-((parent.closest(".selector").children.length-1)*(id))
+            if (name) {
+                name = name.toString().length <= 20 ? name : name.toString().slice(0, 20);
+                Object.defineProperty(db[id].kv[blockN], name, {enumerable: true,value: 0, writable: true, configurable:true});
+                generate()
+            }
+        }
+
+        const remove = (target) => {
+            const parent = target.closest(".block");
+            const selectorID = parent.closest(".selector").dataset.id-1
+            const id = target.dataset.name;
+            delete db[selectorID].kv[+parent.dataset.id-2-3*(selectorID)][id];
+            generate()
+        }
+
+        const save = () => {
+            fetch("/src/active", {
+                "method":"POST", 
+                "headers":{"Content-Type":"application/json;charset=utf-8"},
+                "body": JSON.stringify({data:db, pass:localStorage.getItem("coockie")}),
+            }).then(data=>data.json()).then(data=>{alert(data.status)})
+        }
+
+        const deleteSelector = () => {
+            const id = +prompt("Введите номер ряда");
+            const selectors = document.querySelectorAll(".selector")
+            if (db[id-1]) {
+                db.splice(id-1,1);
+                generate()
+            } else {
+                if (id != 0) alert("Ошибка\nРяд не найден");
+            }
+        }
+
+        const checkAuth = (pass) => {
+            if (!pass) {
+                pass = inputPass.value;
+                localStorage.setItem("coockie", inputPass.value)
+            }
+            fetch("/login", {
+                "method":"POST", 
+                "headers":{"Content-Type":"application/json;charset=utf-8"},
+                "body": JSON.stringify({"data":pass}),
+            }).then(data=>data.json()).then(data=>{
+                if (data.data) {
+                    auth()
+                } else {
+                    alert("Неверный пароль!")
+                }
+            })
+        }
+        
+        const auth = () => {
+            if (!localStorage.getItem("coockie")) localStorage.setItem("coockie", inputPass.value)
+            document.body.style.overflow = "auto";
+            overlay.classList.add("hidden");
+            modal.classList.add("hidden");
+            document.querySelectorAll("svg").forEach(elem=> elem.classList.remove("hidden"));
+            document.querySelectorAll(".remove-btn").forEach(elem=> elem.classList.remove("hidden"));
+            addBtn.classList.remove("hidden");
+            saveBtn.classList.remove("hidden");
+            deleteBtn.classList.remove("hidden");
+            document.querySelector(".add-list-btn").classList.remove("hidden");
+            document.querySelector(".remove-list-btn").classList.remove("hidden");
+            authed = true;
+        }
+
+        const skip = () => {
+            document.body.style.overflow = "auto";
+            overlay.classList.add("hidden");
+            modal.classList.add("hidden");
+            document.querySelectorAll(".list-container").forEach(elem=> elem.style = "display:flex; justify-content: end")
+            document.querySelectorAll("li").forEach(li => li.style = "padding: 4px 0")
+        }
+
+        //events
+        (async()=> {
+            const imgs = await fetch("/images").then(data=>data.json())
+
+            const favicon = document.createElement("link")
+            favicon.rel = "shortcut icon"
+            favicon.href = `data:image/png;base64, ${imgs["favicon"]}`
+            document.querySelector("head").append(favicon);
+            loadOverlay.style.opacity = 0
+            setTimeout(()=> {loadOverlay.remove()}, 300);
+            document.body.style.overflow = "auto";
+
+            generate(await fetch("/src/active").then(data=>data.json()))
+            if (localStorage.getItem("coockie")) checkAuth(localStorage.getItem("coockie"));
+        })()
+    </script>
+</body>
+</html>
+
+
+
