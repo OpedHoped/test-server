@@ -318,31 +318,6 @@
     {
         "armor": [
             {
-                "name": "FN F2000",
-                "mod": 11
-            },
-            {
-                "name": "ВСС «Винторез»",
-                "mod": 10
-            }
-        ],
-        "weapons": [
-            {
-                "name": "Альбатрос-разведчик",
-                "mod": 8
-            }
-        ],
-        "namePers": "Boller",
-        "nameDS": "cybercatlet",
-        "name": "Тимофей",
-        "hp": "0",
-        "bulletRes": "0",
-        "powerRegen": "0",
-        "speed": "0"
-    },
-    {
-        "armor": [
-            {
                 "name": "HK XM8",
                 "mod": 6
             }
@@ -756,6 +731,27 @@
         "namePers": "Dolbim_Kripov",
         "nameDS": "be7okk",
         "name": "Антон",
+        "hp": "0",
+        "bulletRes": "0",
+        "powerRegen": "0",
+        "speed": "0"
+    },
+    {
+        "armor": [
+            {
+                "name": "А-545",
+                "mod": 13
+            }
+        ],
+        "weapons": [
+            {
+                "name": "Бронекостюм «СКАТ-9м»",
+                "mod": 10
+            }
+        ],
+        "namePers": "Signi_",
+        "nameDS": "j0hn_shelby",
+        "name": "Назар",
         "hp": "0",
         "bulletRes": "0",
         "powerRegen": "0",
