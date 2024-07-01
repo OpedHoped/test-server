@@ -747,5 +747,27 @@
         "bulletRes": "0",
         "powerRegen": "0",
         "speed": "0"
+    },
+    {
+        "weapons": [
+            {
+                "name": "FN F2000 Tactical",
+                "mod": 13
+            }
+        ],
+        "armor": [
+            {
+                "name": "Поношенный «Центурион»",
+                "mod": 11
+            }
+        ],
+        "namePers": "АРСОЙКА",
+        "nameDS": "maksION",
+        "name": "Макс",
+        "hp": 9,
+        "bulletRes": 0,
+        "powerRegen": 10.23,
+        "speed": "0",
+        "party": ""
     }
 ]
